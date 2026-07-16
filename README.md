@@ -62,7 +62,20 @@
   - [Commands Reference](#-useful-commands-reference)
   - [Setup Verification](#-setup-verification-checklist)
   - [Getting Help](#-getting-help)
-- [Kontribusi](#-kontribusi)
+- [Contributing Guidelines](#-contributing-guidelines)
+  - [Code of Conduct](#-code-of-conduct)
+  - [Types of Contributions](#-types-of-contributions)
+  - [Getting Started](#-getting-started)
+  - [Development Workflow](#-development-workflow-for-contributors)
+  - [Commit Conventions](#-commit-message-conventions)
+  - [Testing Requirements](#-testing-requirements)
+  - [Pull Request Process](#-pull-request-process)
+  - [Coding Standards](#-coding-standards)
+  - [Documentation Requirements](#-documentation-requirements)
+  - [Review Process](#-review-process)
+  - [Recognition](#-recognition)
+  - [FAQ](#-frequently-asked-questions)
+  - [Need Help](#-need-help)
 - [Lisensi](#lisensi)
 
 ---
@@ -3793,22 +3806,701 @@ If you encounter issues:
 
 ## 🤝 Kontribusi
 
-## 🤝 Kontribusi
+## 🤝 Contributing Guidelines
 
-Kami dengan senang hati menerima kontribusi dari komunitas! Untuk berkontribusi:
+We welcome contributions from the community! Whether you're reporting bugs, suggesting features, or submitting code, thank you for helping make use-ui better.
 
-1. **Fork** repository ini
-2. **Create** branch feature Anda (`git checkout -b feature/AmazingFeature`)
-3. **Commit** perubahan Anda (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** ke branch (`git push origin feature/AmazingFeature`)
-5. **Open** Pull Request
+### 📋 Table of Contents
 
-### Panduan Kontribusi
+- [Code of Conduct](#code-of-conduct)
+- [Types of Contributions](#types-of-contributions)
+- [Getting Started](#getting-started)
+- [Development Workflow](#development-workflow-for-contributors)
+- [Commit Message Conventions](#commit-message-conventions)
+- [Testing Requirements](#testing-requirements)
+- [Pull Request Process](#pull-request-process)
+- [Coding Standards](#coding-standards)
+- [Documentation Requirements](#documentation-requirements)
+- [Review Process](#review-process)
+- [Recognition](#recognition)
 
-- Ikuti code style yang ada
-- Tambahkan tests untuk fitur baru
-- Update dokumentasi jika diperlukan
-- Pastikan semua tests passed
+---
+
+### 📜 Code of Conduct
+
+All contributors are expected to uphold our Code of Conduct:
+
+- **Be Respectful:** Treat all community members with respect and dignity
+- **Be Inclusive:** Welcome contributors of all backgrounds and experiences
+- **Be Constructive:** Provide helpful feedback and focus on improving the project
+- **Be Professional:** Avoid harassment, discrimination, or offensive language
+- **Report Issues:** If you encounter violations, please email conduct@use-ui.dev
+
+---
+
+### 🎯 Types of Contributions
+
+#### 🐛 Bug Reports
+
+Found a bug? Help us fix it!
+
+```bash
+# Create an issue with:
+- Clear title describing the bug
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Browser/OS/Node version
+- Screenshots or video (if applicable)
+```
+
+**Issue Template:**
+```markdown
+## Bug Description
+[Clear description of what the bug is]
+
+## Steps to Reproduce
+1. [First step]
+2. [Second step]
+3. [...]
+
+## Expected Behavior
+[What should happen]
+
+## Actual Behavior
+[What actually happens]
+
+## Environment
+- Browser: Chrome 120.0
+- OS: macOS 14.2
+- Node: 20.10.0
+- npm: 10.2.0
+
+## Screenshots
+[If applicable]
+```
+
+#### ✨ Feature Requests
+
+Have an idea to improve use-ui?
+
+```bash
+# Create an issue with:
+- Clear title describing the feature
+- Problem it solves or value it adds
+- Proposed solution/implementation
+- Alternative solutions considered
+- Additional context (examples, links, etc.)
+```
+
+**Feature Request Template:**
+```markdown
+## Feature Description
+[Clear description of the feature]
+
+## Problem Statement
+[What problem does this solve?]
+
+## Proposed Solution
+[How should this feature work?]
+
+## Alternatives Considered
+[Other approaches you've thought about]
+
+## Additional Context
+[Links, examples, designs, etc.]
+```
+
+#### 📚 Documentation Improvements
+
+Help improve our documentation!
+
+- Typo fixes
+- Clarifications and examples
+- Missing content
+- Better explanations
+- Updated screenshots
+
+#### 💻 Code Contributions
+
+Help build new components, features, and fixes!
+
+---
+
+### 🚀 Getting Started
+
+#### 1. Fork the Repository
+
+```bash
+# Visit GitHub and click "Fork"
+# https://github.com/yourusername/use-ui
+
+# Or use GitHub CLI
+gh repo fork yourusername/use-ui --clone
+cd use-ui
+```
+
+#### 2. Add Upstream Remote
+
+```bash
+# Track the original repository
+git remote add upstream https://github.com/yourusername/use-ui.git
+git fetch upstream
+```
+
+#### 3. Create Feature Branch
+
+```bash
+# Update main branch
+git checkout main
+git fetch upstream
+git rebase upstream/main
+
+# Create feature branch
+git checkout -b feature/my-amazing-feature
+# or
+git checkout -b fix/issue-123
+# or
+git checkout -b docs/improve-readme
+```
+
+#### 4. Install and Verify
+
+```bash
+# Install dependencies
+npm install
+
+# Verify setup
+npm run validate
+
+# Start development
+npm run dev
+```
+
+---
+
+### 🔄 Development Workflow for Contributors
+
+#### Step 1: Make Your Changes
+
+```bash
+# Edit files, create new components, fix bugs
+# Auto-reload enabled in dev server
+
+# For new components, follow the structure:
+src/components/form/MyComponent/
+├── MyComponent.vue           # Component
+├── MyComponent.spec.ts       # Tests
+├── MyComponent.stories.ts    # Storybook
+├── index.ts                  # Export
+└── MyComponent.types.ts      # Types (optional)
+```
+
+#### Step 2: Write/Update Tests
+
+```bash
+# Tests are REQUIRED for:
+# - New components
+# - Bug fixes
+# - New features
+
+# Run tests
+npm run test:watch
+
+# Check coverage
+npm run test:coverage
+# Target: 80%+ coverage
+```
+
+#### Step 3: Check Code Quality
+
+```bash
+# Format code
+npm run format
+
+# Lint code
+npm run lint
+
+# Type check
+npm run type-check
+
+# Or run all checks
+npm run validate
+```
+
+#### Step 4: Run Storybook
+
+```bash
+# Verify visual changes
+npm run storybook
+# http://localhost:6006
+```
+
+---
+
+### 📝 Commit Message Conventions
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+#### Types
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| **feat** | New feature | `feat(button): add size variants` |
+| **fix** | Bug fix | `fix(modal): close on ESC key` |
+| **docs** | Documentation | `docs(readme): update setup instructions` |
+| **style** | Code style (no logic change) | `style(input): fix indentation` |
+| **refactor** | Code refactoring | `refactor(form): simplify validation logic` |
+| **perf** | Performance improvement | `perf(table): optimize rendering` |
+| **test** | Test additions/changes | `test(button): add accessibility tests` |
+| **chore** | Build, CI, dependencies | `chore(deps): upgrade vitest to 1.0` |
+
+#### Examples
+
+```bash
+# Feature with scope
+git commit -m "feat(select): add search/filter capability
+
+- Allows users to search through options
+- Debounces search input by 300ms
+- Highlights matching text
+
+Closes #123"
+
+# Bug fix
+git commit -m "fix(checkbox): prevent double toggle on rapid clicks"
+
+# Documentation
+git commit -m "docs(installation): add Docker setup guide"
+```
+
+---
+
+### ✅ Testing Requirements
+
+#### Unit Tests
+
+```bash
+# Create test file: src/components/form/Button/Button.spec.ts
+
+import { describe, it, expect } from 'vitest'
+import { mount } from '@vue/test-utils'
+import Button from './Button.vue'
+
+describe('Button', () => {
+  it('renders slot content', () => {
+    const wrapper = mount(Button, {
+      slots: { default: 'Click me' }
+    })
+    expect(wrapper.text()).toContain('Click me')
+  })
+
+  it('emits click event', async () => {
+    const wrapper = mount(Button)
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('click')).toHaveLength(1)
+  })
+
+  it('respects disabled prop', () => {
+    const wrapper = mount(Button, {
+      props: { disabled: true }
+    })
+    expect(wrapper.attributes('disabled')).toBe('')
+  })
+})
+```
+
+#### Coverage Requirements
+
+- **Minimum:** 80% overall coverage
+- **New Components:** 100% coverage required
+- **Bug Fixes:** Include tests that fail before fix, pass after
+
+```bash
+# Run coverage report
+npm run test:coverage
+
+# View coverage HTML report
+open coverage/index.html
+```
+
+#### E2E Tests (for user flows)
+
+```bash
+# tests/e2e/form-submission.spec.ts
+import { test, expect } from '@playwright/test'
+
+test('form submission flow', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+  
+  await page.fill('input[name="name"]', 'John Doe')
+  await page.click('button[type="submit"]')
+  
+  await expect(page.locator('.success-message')).toBeVisible()
+})
+```
+
+---
+
+### 🔀 Pull Request Process
+
+#### 1. Keep Your Branch Updated
+
+```bash
+# Before submitting PR, sync with upstream
+git fetch upstream
+git rebase upstream/main
+
+# If conflicts, resolve them
+# Then force push your branch
+git push --force-with-lease origin feature/my-feature
+```
+
+#### 2. Create Pull Request
+
+Visit GitHub and click "New Pull Request"
+
+#### 3. Fill PR Template
+
+```markdown
+## Description
+[Brief description of changes]
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Related Issues
+Closes #123
+
+## Changes Made
+- [What specifically changed]
+- [Key implementation details]
+
+## Testing Done
+- [ ] Unit tests added/updated
+- [ ] E2E tests added/updated
+- [ ] Manual testing completed
+- [ ] Coverage maintained (80%+)
+
+## Breaking Changes
+[If applicable, list breaking changes]
+
+## Screenshots
+[If applicable for UI changes]
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Tests pass locally
+- [ ] Documentation updated
+- [ ] No new warnings generated
+- [ ] Commit messages follow conventions
+```
+
+#### 4. PR Size Guidelines
+
+| PR Size | Scope | Review Time |
+|---------|-------|-------------|
+| **Small** | < 200 lines | 1-2 days |
+| **Medium** | 200-500 lines | 2-3 days |
+| **Large** | 500+ lines | Consider breaking into smaller PRs |
+
+**Tip:** Smaller PRs are reviewed and merged faster!
+
+---
+
+### 🎨 Coding Standards
+
+#### Vue 3 Component Structure
+
+```vue
+<template>
+  <div class="use-button" :class="buttonClass">
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { ButtonProps } from './Button.types'
+
+// Define props with full types
+const props = withDefaults(defineProps<ButtonProps>(), {
+  variant: 'primary',
+  size: 'md',
+  disabled: false
+})
+
+// Define emits
+const emit = defineEmits<{
+  click: [event: MouseEvent]
+}>()
+
+// Computed properties
+const buttonClass = computed(() => ({
+  'use-button--primary': props.variant === 'primary',
+  'use-button--disabled': props.disabled,
+  [`use-button--${props.size}`]: true
+}))
+
+// Methods
+const handleClick = (event: MouseEvent) => {
+  if (!props.disabled) {
+    emit('click', event)
+  }
+}
+</script>
+
+<style scoped>
+.use-button {
+  padding: var(--use-spacing-md);
+  border-radius: var(--use-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.use-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
+```
+
+#### TypeScript Standards
+
+```typescript
+// ✅ Good: Explicit types
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'tertiary'
+  size: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+}
+
+// ❌ Avoid: Using any
+const handleClick = (event: any) => {}
+
+// ✅ Good: Specific types
+const handleClick = (event: MouseEvent) => {}
+```
+
+#### CSS/SCSS Standards
+
+```css
+/* ✅ Use CSS Variables */
+:root {
+  --use-color-primary: #3b82f6;
+  --use-spacing-md: 16px;
+}
+
+/* ✅ BEM Naming with use- prefix */
+.use-button { }
+.use-button--primary { }
+.use-button__icon { }
+
+/* ❌ Avoid: Generic names */
+.button { }
+
+/* ✅ Use scoped styles or CSS Modules */
+<style scoped>
+/* Component-specific styles */
+</style>
+```
+
+#### Naming Conventions
+
+```typescript
+// Components: PascalCase
+export const UseButton = defineComponent({})
+export const UseFormField = defineComponent({})
+
+// Files: PascalCase for components
+src/components/form/Button/Button.vue
+src/components/form/FormField/FormField.vue
+
+// Composables: camelCase with 'use' prefix
+export const useForm = () => {}
+export const useModal = () => {}
+
+// Constants: UPPER_SNAKE_CASE
+export const DEFAULT_TIMEOUT = 5000
+export const MAX_ITEMS = 100
+
+// Private variables: _camelCase
+const _internalState = {}
+```
+
+---
+
+### 📖 Documentation Requirements
+
+#### Component Documentation
+
+Every new component must include:
+
+```markdown
+# UseButton
+
+Brief description of the component.
+
+## Installation
+
+```bash
+npm install use-ui
+```
+
+## Usage
+
+### Vue 3
+\`\`\`vue
+<template>
+  <UseButton @click="handleClick">Click me</UseButton>
+</template>
+
+<script setup>
+const handleClick = () => console.log('Clicked!')
+</script>
+\`\`\`
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'primary'\|'secondary'` | `'primary'` | Button style variant |
+| size | `'sm'\|'md'\|'lg'` | `'md'` | Button size |
+| disabled | `boolean` | `false` | Disable button |
+
+### Events
+
+| Name | Payload | Description |
+|------|---------|-------------|
+| click | `MouseEvent` | Emitted when button is clicked |
+
+### Slots
+
+| Name | Description |
+|------|-------------|
+| default | Button label content |
+
+### Accessibility
+
+- Full keyboard support (Tab, Enter, Space)
+- ARIA labels for screen readers
+- High contrast mode support
+\`\`\`
+
+#### README Updates
+
+If adding new features or changing APIs, update:
+- `README.md` - Add to relevant section
+- Component-specific docs in `docs/`
+- Changelog (if version-significant)
+
+---
+
+### 🔍 Review Process
+
+#### Code Review
+
+Our maintainers will review your PR for:
+
+- ✅ Code quality and standards compliance
+- ✅ Test coverage (≥80%)
+- ✅ Performance impact
+- ✅ Documentation completeness
+- ✅ Accessibility compliance (WCAG 2.1 AA)
+- ✅ Breaking changes documentation
+
+#### Timeline
+
+- **Small PRs:** 1-2 business days
+- **Medium PRs:** 2-3 business days
+- **Large PRs:** 3-5 business days
+
+#### Feedback Loop
+
+- **Requested Changes:** Please update and re-request review
+- **Comments:** Address all comments before merging
+- **Conversations:** We're always open to discussion!
+
+#### Approval & Merge
+
+- Minimum 2 approvals required for merge
+- All CI checks must pass
+- No merge conflicts
+- Merging follows "Squash and Merge" strategy
+
+---
+
+### 🌟 Recognition
+
+Contributors are recognized in multiple ways:
+
+#### Contributors List
+
+All contributors appear in:
+- [CONTRIBUTORS.md](CONTRIBUTORS.md) file
+- GitHub contributors page
+- Release notes
+
+#### Recognition Tiers
+
+| Contribution | Recognition |
+|--------------|--------------|
+| 1-5 PRs | 👤 Listed in CONTRIBUTORS.md |
+| 5-10 PRs | 👥 Added to team member list |
+| 10+ PRs | 🎖️ Core contributor status |
+| Major features | 💪 Feature author credit |
+
+#### Celebrating Contributions
+
+- 🎉 Thank you in PR discussion
+- 📢 Featured in release notes
+- 🏆 Shoutout on social media (for major contributions)
+
+---
+
+### ❓ Frequently Asked Questions
+
+**Q: How long until my PR is reviewed?**
+A: Small PRs typically within 1-2 business days. Large PRs may take longer.
+
+**Q: My PR was rejected. What do I do?**
+A: Don't worry! We'll explain why. Feel free to ask questions, revise, and resubmit.
+
+**Q: Can I work on multiple features at once?**
+A: Yes, but keep them in separate branches and PRs for easier review.
+
+**Q: How do I become a maintainer?**
+A: Consistent quality contributions, community engagement, and demonstrated expertise.
+
+**Q: What if I disagree with feedback?**
+A: Let's discuss! We value different perspectives and want to find the best solution.
+
+---
+
+### 🆘 Need Help?
+
+- **Questions?** Open a [Discussion](https://github.com/yourusername/use-ui/discussions)
+- **Found an issue?** Create a [Bug Report](https://github.com/yourusername/use-ui/issues)
+- **Have an idea?** Submit a [Feature Request](https://github.com/yourusername/use-ui/issues)
+- **Email:** contribute@use-ui.dev
+
+---
+
+**Thank you for contributing to use-ui! 🎉**
 
 ---
 
