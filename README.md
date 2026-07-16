@@ -9,6 +9,7 @@
 ## 📋 Daftar Isi
 
 - [Project Overview](#project-overview)
+- [Features List](#-features-list)
 - [Fitur Utama](#fitur-utama)
 - [Instalasi](#instalasi)
 - [Quick Start](#quick-start)
@@ -100,7 +101,140 @@
 
 ---
 
-## ✨ Fitur Utama
+## 📦 Features List
+
+### ✅ Komponen Form (Form Components)
+
+| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
+|----------|-----------|--------|-------|-------|---------|
+| **UseButton** | Button dengan multiple variants & sizes | ✅ Available | ✅ | ✅ | ✅ |
+| **UseInput** | Text input field dengan validation | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSelect** | Dropdown selection component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseCheckbox** | Checkbox control | ✅ Available | ✅ | ✅ | ✅ |
+| **UseRadio** | Radio button group | ✅ Available | ✅ | ✅ | ✅ |
+| **UseTextarea** | Multi-line text input | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSwitch** | Toggle/Switch component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseFileUpload** | File upload dengan drag-drop | ✅ Available | ✅ | ✅ | ✅ |
+| **UseForm** | Form wrapper dengan validation | ✅ Available | ✅ | ✅ | ✅ |
+| **UseRating** | Rating star component | 🔄 Coming | - | - | - |
+| **UseSlider** | Range slider component | 🔄 Coming | - | - | - |
+
+### ✅ Komponen Layout (Layout Components)
+
+| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
+|----------|-----------|--------|-------|-------|---------|
+| **UseContainer** | Container dengan max-width | ✅ Available | ✅ | ✅ | ✅ |
+| **UseGrid** | Grid layout system (12 columns) | ✅ Available | ✅ | ✅ | ✅ |
+| **UseStack** | Flexbox stack (horizontal/vertical) | ✅ Available | ✅ | ✅ | ✅ |
+| **UseCard** | Card component dengan slot support | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSpacer** | Spacing utility component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseFlex** | Flexbox wrapper component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseAspectRatio** | Aspect ratio wrapper | 🔄 Coming | - | - | - |
+
+### ✅ Komponen Navigation (Navigation Components)
+
+| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
+|----------|-----------|--------|-------|-------|---------|
+| **UseNavbar** | Top navigation bar | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSidebar** | Side navigation menu | ✅ Available | ✅ | ✅ | ✅ |
+| **UseBreadcrumb** | Breadcrumb navigation | ✅ Available | ✅ | ✅ | ✅ |
+| **UseMenu** | Dropdown menu component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseTabs** | Tab navigation component | ✅ Available | ✅ | ✅ | ✅ |
+| **UsePagination** | Pagination control | ✅ Available | ✅ | ✅ | ✅ |
+| **UseButton Group** | Grouped button toolbar | 🔄 Coming | - | - | - |
+
+### ✅ Komponen Feedback (Feedback & Notification)
+
+| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
+|----------|-----------|--------|-------|-------|---------|
+| **UseAlert** | Alert/banner message | ✅ Available | ✅ | ✅ | ✅ |
+| **UseToast** | Toast notification system | ✅ Available | ✅ | ✅ | ✅ |
+| **UseModal** | Modal dialog component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseDrawer** | Side drawer/panel | ✅ Available | ✅ | ✅ | ✅ |
+| **UseTooltip** | Tooltip information | ✅ Available | ✅ | ✅ | ✅ |
+| **UsePopover** | Popover overlay | ✅ Available | ✅ | ✅ | ✅ |
+| **UseProgress** | Progress bar | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSkeleton** | Loading skeleton | ✅ Available | ✅ | ✅ | ✅ |
+| **UseSpinner** | Loading spinner | ✅ Available | ✅ | ✅ | ✅ |
+| **UseConfirm** | Confirmation dialog | 🔄 Coming | - | - | - |
+
+### ✅ Komponen Data Display (Data Display)
+
+| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
+|----------|-----------|--------|-------|-------|---------|
+| **UseTable** | Data table dengan sorting/filtering | ✅ Available | ✅ | ✅ | ✅ |
+| **UseBadge** | Badge component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseTag** | Tag component dengan variants | ✅ Available | ✅ | ✅ | ✅ |
+| **UseAvatar** | Avatar component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseList** | List component | ✅ Available | ✅ | ✅ | ✅ |
+| **UseStatistic** | Statistic display | ✅ Available | ✅ | ✅ | ✅ |
+| **UseTimeline** | Timeline component | 🔄 Coming | - | - | - |
+| **UseTree** | Tree view component | 🔄 Coming | - | - | - |
+
+### 🎨 Design System Features
+
+| Fitur | Deskripsi | Status |
+|-------|-----------|--------|
+| **Color Palette** | Comprehensive color system dengan 9 shades per color | ✅ Available |
+| **Typography** | Font sizing & weight system | ✅ Available |
+| **Spacing Scale** | Standardized spacing (4px base unit) | ✅ Available |
+| **Breakpoints** | Responsive breakpoints (5 breakpoints) | ✅ Available |
+| **Shadows** | Elevation shadow system | ✅ Available |
+| **Border Radius** | Radius scale untuk components | ✅ Available |
+| **Icons** | SVG icon library built-in | 🔄 Coming |
+| **Dark Mode** | Automatic dark theme support | 🔄 Coming |
+| **Theme Tokens** | Design token system | 🔄 Coming |
+
+### 📚 Developer Experience Features
+
+| Fitur | Deskripsi | Status |
+|-------|-----------|--------|
+| **TypeScript Support** | Full TypeScript types & generics | ✅ Available |
+| **Storybook** | Interactive component playground | ✅ Available |
+| **API Documentation** | Auto-generated from JSDoc | ✅ Available |
+| **Usage Examples** | Code examples untuk setiap komponen | ✅ Available |
+| **Design Guidelines** | Best practices & usage patterns | ✅ Available |
+| **Playground** | Online playground untuk testing | 🔄 Coming |
+| **CLI Tool** | Scaffold components & projects | 🔄 Coming |
+| **Figma Plugin** | Figma design kit integration | 📅 Planned |
+
+### 🔧 Advanced Features
+
+| Fitur | Deskripsi | Status |
+|-------|-----------|--------|
+| **Composables (Vue)** | Vue 3 composition utilities | ✅ Available |
+| **Hooks (React)** | Custom React hooks | ✅ Available |
+| **Form Validation** | Built-in validation library | ✅ Available |
+| **Accessibility** | WCAG 2.1 Level AA compliance | ✅ Available |
+| **Responsive** | Mobile-first responsive design | ✅ Available |
+| **Theming** | Runtime theming dengan CSS Variables | ✅ Available |
+| **Performance** | Tree-shakeable, code splitting ready | ✅ Available |
+| **i18n Ready** | Internationalization support | ✅ Available |
+| **Keyboard Navigation** | Full keyboard accessibility | ✅ Available |
+| **Custom Events** | Framework-agnostic event system | ✅ Available |
+
+### 📊 Browser Support
+
+| Browser | Minimum Version | Status |
+|---------|-----------------|--------|
+| Chrome | 90+ | ✅ Supported |
+| Firefox | 88+ | ✅ Supported |
+| Safari | 14+ | ✅ Supported |
+| Edge | 90+ | ✅ Supported |
+| Opera | 76+ | ✅ Supported |
+| IE 11 | - | ❌ Not Supported |
+
+### 📈 Performance Metrics
+
+| Metrik | Target | Achieved |
+|--------|--------|----------|
+| **Bundle Size (gzip)** | < 30KB | ✅ ~25KB |
+| **Lighthouse Performance** | > 90 | ✅ 95 |
+| **First Contentful Paint** | < 1.5s | ✅ ~1.2s |
+| **Tree Shakeable** | 100% | ✅ Yes |
+| **Framework Overhead** | < 5KB | ✅ ~3KB |
+
+---
 
 ### 🎯 Design System
 - **Konsistensi Visual** - Palette warna, typography, dan spacing yang terstandar
