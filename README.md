@@ -76,7 +76,20 @@
   - [Recognition](#-recognition)
   - [FAQ](#-frequently-asked-questions)
   - [Need Help](#-need-help)
-- [Lisensi](#lisensi)
+- [License](#-license)
+  - [MIT License Overview](#mit-license-overview)
+  - [What You Can/Must/Cannot Do](#what-you-can-do-)
+  - [Using in Your Project](#using-use-ui-in-your-project)
+  - [Third-Party Dependencies](#third-party-dependencies)
+  - [Commercial Use](#commercial-use)
+  - [Open Source Attribution](#open-source-attribution)
+  - [Dual Licensing](#dual-licensing-enterprise)
+  - [Copyright & Attribution](#copyright--attribution)
+  - [Common Use Cases](#common-use-cases--license-compliance)
+  - [FAQ](#faqs)
+  - [Compliance Checklist](#license-compliance-checklist)
+  - [Report Violations](#report-license-violations)
+  - [Related Resources](#related-resources)
 
 ---
 
@@ -4504,9 +4517,293 @@ A: Let's discuss! We value different perspectives and want to find the best solu
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dilisensikan di bawah [MIT License](LICENSE) - lihat file LICENSE untuk detail lengkap.
+### MIT License Overview
+
+use-ui is released under the **MIT License** — a permissive open-source license that allows you to use, modify, and distribute the software freely.
+
+#### License Grant
+
+```
+MIT License
+
+Copyright (c) 2024 use-ui Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+### What You Can Do ✅
+
+| Permission | Description |
+|-----------|-------------|
+| **Commercial Use** | Use use-ui in commercial projects and applications |
+| **Modification** | Modify and adapt the library to your needs |
+| **Distribution** | Distribute use-ui as part of your product |
+| **Private Use** | Use privately without sharing modifications |
+| **Sublicense** | Grant sublicenses to third parties |
+
+### What You Must Do 📋
+
+| Requirement | Description |
+|-----------|-------------|
+| **Include License** | Include the MIT license and copyright notice in your project |
+| **State Changes** | Document modifications you make to the library |
+
+### What You Cannot Do ❌
+
+| Restriction | Description |
+|-----------|-------------|
+| **No Liability** | The authors/maintainers hold no liability for damages or issues |
+| **No Warranty** | The software is provided "as-is" without warranty |
+| **No Trademark** | You cannot use the "use-ui" trademark without permission |
+
+---
+
+### Using use-ui in Your Project
+
+#### Attribution (Recommended)
+
+Include this in your project's README or LICENSE file:
+
+```markdown
+This project uses [use-ui](https://github.com/yourusername/use-ui), 
+licensed under the MIT License. Copyright (c) 2024 use-ui Contributors.
+```
+
+#### License Header in Components
+
+If you modify components, add a header:
+
+```vue
+<!--
+Based on use-ui components
+Licensed under the MIT License
+Copyright (c) 2024 use-ui Contributors
+Modified by [Your Name/Company]
+-->
+```
+
+---
+
+### Third-Party Dependencies
+
+use-ui depends on open-source libraries. See [package.json](package.json) for the complete list:
+
+| Dependency | License | Purpose |
+|-----------|---------|---------|
+| Vue 3 | MIT | Progressive framework |
+| Vite | MIT | Build tool |
+| TypeScript | Apache 2.0 | Type safety |
+| Vitest | MIT | Testing framework |
+| Playwright | Apache 2.0 | E2E testing |
+| Storybook | MIT | Component documentation |
+| ESLint | MIT | Code linting |
+| Prettier | MIT | Code formatting |
+| PostCSS | MIT | CSS processing |
+
+**Full dependency tree with licenses:**
+```bash
+npm list --depth=0 | grep -E "^├──|^└──"
+# All dependencies are listed with their versions in package-lock.json
+```
+
+---
+
+### Commercial Use
+
+✅ **Yes, you can use use-ui commercially!**
+
+- Use in commercial projects without restrictions
+- Include in SaaS applications
+- Redistribute as part of your product
+- Modify components for your use case
+
+**Just remember to:**
+1. Include the MIT license in your distribution
+2. Include the copyright notice
+3. Document any modifications
+4. List use-ui in your dependencies/credits
+
+#### Commercial Support
+
+For commercial support, consulting, or custom component development:
+
+- **Email:** support@use-ui.dev
+- **Website:** https://use-ui.dev/support
+
+---
+
+### Open Source Attribution
+
+If you use use-ui in an open-source project, please add us to your CONTRIBUTORS or README:
+
+```markdown
+## Dependencies
+
+- [use-ui](https://github.com/yourusername/use-ui) - MIT License - UI Component Library
+```
+
+---
+
+### Dual Licensing (Enterprise)
+
+For organizations requiring different licensing terms:
+
+- **Community License:** MIT (free, open)
+- **Enterprise License:** Available for custom terms
+- **Contact:** licensing@use-ui.dev
+
+---
+
+### Copyright & Attribution
+
+```
+© 2024 use-ui Contributors
+All rights reserved under MIT License
+```
+
+**Original Authors:**
+- [Founder Name] - Lead Developer
+- [Core Contributors] - Repository Contributors
+
+**Full contributors list:** See [CONTRIBUTORS.md](CONTRIBUTORS.md)
+
+---
+
+### Common Use Cases & License Compliance
+
+#### ✅ Allowed
+
+```markdown
+1. Using use-ui in my web application
+   - Include MIT license in distribution ✓
+
+2. Modifying components for my project
+   - Include modified license header ✓
+
+3. Publishing a tool that uses use-ui
+   - List use-ui as a dependency ✓
+   - Include MIT license ✓
+
+4. Teaching/Learning from source code
+   - Study and modify for learning ✓
+
+5. Contributing improvements back
+   - Submit PRs under MIT license ✓
+```
+
+#### ⚠️ Requires Attention
+
+```markdown
+1. Selling use-ui as a standalone product
+   - Allowed, but must include original MIT license and copyright
+
+2. Bundling with proprietary code
+   - Allowed, must disclose use-ui as MIT-licensed
+
+3. Modifying and renaming the library
+   - Allowed, but cite use-ui as the original source
+   - Recommended: Include "Based on use-ui" in documentation
+
+4. Using in patent litigation
+   - MIT license includes implicit patent grant
+   - See license text for details
+```
+
+#### ❌ Not Allowed (Violates License)
+
+```markdown
+1. Removing copyright/license notices
+   - All notices must be included in distributions
+
+2. Claiming you wrote the original code
+   - Must attribute to use-ui contributors
+
+3. Holding authors liable for damages
+   - See warranty disclaimer in MIT license
+
+4. Preventing others from using MIT-licensed code
+   - License remains MIT when distributed further
+```
+
+---
+
+### Frequently Asked Questions
+
+**Q: Can I use use-ui in a commercial product?**
+A: Yes! MIT license allows commercial use. Just include the license and copyright notice.
+
+**Q: Do I need to open-source my project?**
+A: No. MIT license allows proprietary use. You only need to include the license notice.
+
+**Q: Can I modify use-ui?**
+A: Yes, the MIT license allows modifications. Document your changes.
+
+**Q: What if I find a bug?**
+A: Report it on [GitHub Issues](https://github.com/yourusername/use-ui/issues). Fixes are appreciated via PR.
+
+**Q: Can I redistribute use-ui?**
+A: Yes, with MIT license and copyright notice included.
+
+**Q: Do you offer commercial licenses?**
+A: Yes, for organizations needing different terms. Contact licensing@use-ui.dev
+
+**Q: What about patents?**
+A: MIT license includes an explicit patent grant. See license text for technical details.
+
+**Q: Can I use use-ui in a closed-source project?**
+A: Yes! MIT allows proprietary use as long as you include the license notice.
+
+---
+
+### License Compliance Checklist
+
+Before distributing your project using use-ui:
+
+- [ ] MIT License file included in distribution
+- [ ] Copyright notice visible (can be in LICENSE file)
+- [ ] Changes documented (if modified)
+- [ ] use-ui listed in dependencies/credits
+- [ ] Third-party licenses documented
+- [ ] No copyright notices removed
+- [ ] Package.json includes use-ui as dependency
+- [ ] README acknowledges use-ui
+
+---
+
+### Report License Violations
+
+If you find use-ui being used in violation of the MIT license:
+
+- **Email:** legal@use-ui.dev
+- **GitHub Issues:** [Create Issue](https://github.com/yourusername/use-ui/issues)
+- **Include:** Details of violation and project URL
+
+---
+
+### Related Resources
+
+- [MIT License Full Text](https://opensource.org/licenses/MIT) - Official license
+- [SPDX License List](https://spdx.org/licenses/MIT.html) - License registry
+- [Choose a License](https://choosealicense.com/licenses/mit/) - License guide
+- [Open Source Initiative](https://opensource.org/) - Open source standards
 
 ---
 
