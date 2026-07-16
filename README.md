@@ -8,6 +8,7 @@
 
 ## 📋 Daftar Isi
 
+- [Project Overview](#project-overview)
 - [Fitur Utama](#fitur-utama)
 - [Instalasi](#instalasi)
 - [Quick Start](#quick-start)
@@ -19,6 +20,83 @@
 - [Setup Development](#setup-development)
 - [Kontribusi](#kontribusi)
 - [Lisensi](#lisensi)
+
+---
+
+## 🎯 Project Overview
+
+### Visi & Misi
+
+**use-ui** dilahirkan dari kebutuhan akan UI component library yang modern, mudah digunakan, dan tidak mengikat ke framework tertentu. Proyek ini bertujuan untuk:
+
+- 🎨 **Democratisasi UI Development** - Membuat UI component library yang accessible dan mudah digunakan oleh developer dari semua level
+- 🔄 **Framework Agnostic** - Mendukung berbagai framework modern (Vue, React, Angular, Vanilla JS)
+- 📖 **Developer Experience** - Menyediakan dokumentasi lengkap, contoh kode, dan interactive playground
+- 🏗️ **Production Ready** - Komponen yang robust, tested, dan siap untuk production
+
+### Siapa Target use-ui?
+
+✅ **Frontend Developers** - Yang mencari UI component library yang cepat untuk dikonfigurasi
+✅ **Design Systems Teams** - Yang ingin membangun design system yang konsisten
+✅ **Startup & Agency** - Yang butuh cepat prototype dan launch aplikasi
+✅ **Enterprise** - Yang membutuhkan customizable component library
+✅ **Open Source Contributors** - Yang ingin berkontribusi pada proyek yang growing
+
+### Nilai Inti Proyek
+
+| Nilai | Penjelasan |
+|-------|-----------|
+| **Simplicity** | Mudah dipahami, mudah digunakan, mudah dikustomisasi |
+| **Consistency** | Design yang konsisten, API yang predictable |
+| **Quality** | Tested code, documented, performance optimized |
+| **Flexibility** | Dapat digunakan di berbagai platform dan use case |
+| **Community** | Open source, collaborative, welcoming |
+
+### Roadmap & Milestone
+
+#### Phase 1: Foundation (Q3 2024)
+- ✅ Setup project structure dan tooling
+- ✅ Create base component library (Button, Input, Card, etc)
+- ✅ Setup Storybook untuk component documentation
+- ✅ Create design system dengan CSS Variables
+
+#### Phase 2: Expansion (Q4 2024)
+- 🔄 Add advanced components (Modal, Dropdown, Tabs)
+- 🔄 Build React & Angular wrappers
+- 🔄 Setup comprehensive testing suite
+- 🔄 Launch official documentation site
+
+#### Phase 3: Optimization (Q1 2025)
+- 📅 Performance optimization dan bundle size reduction
+- 📅 Accessibility audit dan compliance (WCAG 2.1 AA)
+- 📅 Add theming & customization capabilities
+- 📅 Build CLI tool untuk scaffolding
+
+#### Phase 4: Scale (Q2+ 2025)
+- 📅 Community plugins & extensions
+- 📅 Premium templates & themes
+- 📅 Enterprise support program
+- 📅 Mobile (React Native) support
+
+### Komparasi dengan Library Lain
+
+| Aspek | use-ui | Bootstrap | Material UI | Tailwind |
+|-------|--------|-----------|-------------|----------|
+| **Framework** | Vue/React/Angular/Vanilla | Vanilla/jQuery | React | CSS Utility |
+| **Styling** | CSS + Tailwind | CSS | Emotion (CSS-in-JS) | Utility Classes |
+| **Customization** | CSS Variables | SCSS Variables | Theme Provider | Config |
+| **Bundle Size** | ~25KB gzip | ~50KB gzip | ~100KB+ | ~15KB gzip |
+| **Learning Curve** | Easy | Medium | Medium | Easy |
+| **Production Ready** | Yes | Yes | Yes | Yes |
+
+### Keunggulan use-ui
+
+✨ **Modern** - Built dengan teknologi terkini (Vue 3 Composition API, Vite, TypeScript)
+✨ **Lightweight** - Minimal dependencies, optimized untuk performance
+✨ **Developer Friendly** - Clear API, comprehensive docs, helpful error messages
+✨ **Accessible** - WCAG 2.1 compliant dari awal
+✨ **Highly Customizable** - CSS Variables, design tokens, theme support
+✨ **Framework Flexible** - Tidak terikat satu framework, bisa digunakan dimana saja
 
 ---
 
