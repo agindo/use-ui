@@ -41,7 +41,15 @@
   - [Performance Considerations](#-performance-considerations)
   - [When to Use Each Framework](#-when-to-use-each-framework)
 - [Struktur Proyek](#struktur-proyek)
-- [Setup Development](#setup-development)
+  - [Complete Directory Tree](#-complete-directory-tree)
+  - [Directory Purposes](#-directory-purposes)
+  - [Component File Structure](#-component-file-structure-example)
+  - [npm Scripts](#-npm-scripts)
+  - [Configuration Files](#-configuration-files-explained)
+  - [Build Output Structure](#-build-output-structure)
+  - [Development Workflow](#-development-workflow)
+  - [Entry Points](#-entry-points)
+- [Setup Development](#-setup-development)
 - [Kontribusi](#kontribusi)
 - [Lisensi](#lisensi)
 
@@ -2691,45 +2699,573 @@ All: Tree-shakeable → ~15KB with single component
 
 ## 📁 Struktur Proyek
 
-## 📁 Struktur Proyek
+### 📂 Complete Directory Tree
 
 ```
 use-ui/
-├── src/
-│   ├── components/           # Komponen UI
-│   │   ├── Button/
-│   │   ├── Input/
-│   │   ├── Card/
-│   │   ├── Modal/
-│   │   ├── Toast/
+│
+├── 📁 src/                           # Main source code
+│   ├── 📁 components/                # UI Components (organized by category)
+│   │   ├── 📁 form/                  # Form components
+│   │   │   ├── Button.vue            # Button component
+│   │   │   ├── Button.spec.ts        # Button tests
+│   │   │   ├── Input.vue
+│   │   │   ├── Input.spec.ts
+│   │   │   ├── Select.vue
+│   │   │   ├── Checkbox.vue
+│   │   │   ├── Radio.vue
+│   │   │   ├── Textarea.vue
+│   │   │   ├── Switch.vue
+│   │   │   └── Form.vue
+│   │   │
+│   │   ├── 📁 layout/                # Layout components
+│   │   │   ├── Container.vue
+│   │   │   ├── Grid.vue
+│   │   │   ├── Stack.vue
+│   │   │   ├── Card.vue
+│   │   │   ├── Flex.vue
+│   │   │   └── AspectRatio.vue
+│   │   │
+│   │   ├── 📁 navigation/            # Navigation components
+│   │   │   ├── Navbar.vue
+│   │   │   ├── Sidebar.vue
+│   │   │   ├── Breadcrumb.vue
+│   │   │   ├── Menu.vue
+│   │   │   ├── Tabs.vue
+│   │   │   └── Pagination.vue
+│   │   │
+│   │   ├── 📁 feedback/              # Feedback components
+│   │   │   ├── Alert.vue
+│   │   │   ├── Toast.vue
+│   │   │   ├── Modal.vue
+│   │   │   ├── Drawer.vue
+│   │   │   ├── Popover.vue
+│   │   │   ├── Tooltip.vue
+│   │   │   ├── Progress.vue
+│   │   │   ├── Skeleton.vue
+│   │   │   ├── Spinner.vue
+│   │   │   └── Confirm.vue
+│   │   │
+│   │   └── 📁 data/                  # Data display components
+│   │       ├── Table.vue
+│   │       ├── Badge.vue
+│   │       ├── Tag.vue
+│   │       ├── Avatar.vue
+│   │       ├── List.vue
+│   │       ├── Statistic.vue
+│   │       ├── Timeline.vue
+│   │       └── Tree.vue
+│   │
+│   ├── 📁 composables/               # Vue Composition API logic (reusable)
+│   │   ├── useForm.ts                # Form handling logic
+│   │   ├── useModal.ts               # Modal state management
+│   │   ├── useToast.ts               # Toast notifications
+│   │   ├── useAsync.ts               # Async operations
+│   │   ├── useTheme.ts               # Theme management
+│   │   ├── useClickOutside.ts        # Detect clicks outside element
+│   │   ├── useFocus.ts               # Focus management
+│   │   ├── useKeyboard.ts            # Keyboard event handling
+│   │   └── useResponsive.ts          # Responsive breakpoints
+│   │
+│   ├── 📁 styles/                    # Global styles & design tokens
+│   │   ├── tokens.css                # Design system tokens
+│   │   │   ├── colors.css
+│   │   │   ├── typography.css
+│   │   │   ├── spacing.css
+│   │   │   ├── shadows.css
+│   │   │   ├── breakpoints.css
+│   │   │   └── transitions.css
+│   │   │
+│   │   ├── themes/                   # Theme files
+│   │   │   ├── light.css             # Light theme
+│   │   │   ├── dark.css              # Dark theme
+│   │   │   └── custom.css            # Custom theme template
+│   │   │
+│   │   ├── base.css                  # Reset & base styles
+│   │   ├── components.css            # Component-specific styles
+│   │   ├── utilities.css             # Utility classes
+│   │   ├── accessibility.css         # A11y styles
+│   │   ├── animations.css            # Animation keyframes
+│   │   └── main.css                  # Main entry point
+│   │
+│   ├── 📁 utils/                     # Utility functions
+│   │   ├── classnames.ts             # Class name merging
+│   │   ├── validators.ts             # Form validators
+│   │   ├── accessibility.ts          # A11y helpers
+│   │   ├── events.ts                 # Event utilities
+│   │   ├── dom.ts                    # DOM helpers
+│   │   ├── formatting.ts             # Data formatting
+│   │   ├── storage.ts                # LocalStorage helpers
+│   │   └── constants.ts              # Constants & enums
+│   │
+│   ├── 📁 types/                     # TypeScript type definitions
+│   │   ├── components.ts             # Component prop types
+│   │   ├── events.ts                 # Component event types
+│   │   ├── theme.ts                  # Theme types
+│   │   ├── form.ts                   # Form types
+│   │   └── index.ts                  # Main types export
+│   │
+│   ├── 📁 directives/                # Vue directives
+│   │   ├── vClickOutside.ts          # Click outside directive
+│   │   ├── vFocus.ts                 # Auto-focus directive
+│   │   └── vLoading.ts               # Loading state directive
+│   │
+│   ├── App.vue                       # Root Vue component (Storybook demo)
+│   ├── main.ts                       # Entry point (development)
+│   └── index.ts                      # Main library export
+│
+├── 📁 packages/                      # Framework-specific packages
+│   ├── 📁 vue3/                      # Vue 3 package
+│   │   ├── package.json
+│   │   ├── src/
+│   │   └── dist/
+│   │
+│   ├── 📁 react/                     # React package
+│   │   ├── package.json
+│   │   ├── src/
+│   │   │   ├── components/           # React components
+│   │   │   ├── hooks/                # React hooks (useButton, useInput, etc.)
+│   │   │   ├── providers/            # Context providers
+│   │   │   └── index.ts
+│   │   └── dist/
+│   │
+│   ├── 📁 angular/                   # Angular package
+│   │   ├── package.json
+│   │   ├── src/
+│   │   │   ├── components/           # Angular components
+│   │   │   ├── directives/           # Angular directives
+│   │   │   ├── services/             # Angular services
+│   │   │   ├── modules/              # Feature modules
+│   │   │   └── index.ts
+│   │   └── dist/
+│   │
+│   └── 📁 web-components/            # Vanilla JS / Web Components
+│       ├── package.json
+│       ├── src/
+│       │   ├── components/           # Web Components
+│       │   ├── registry.ts           # Component registry
+│       │   ├── utils/
+│       │   └── index.ts
+│       └── dist/
+│
+├── 📁 docs/                          # Documentation
+│   ├── 📁 guide/                     # User guides
+│   │   ├── getting-started.md
+│   │   ├── installation.md
+│   │   ├── quick-start.md
+│   │   ├── theming.md
+│   │   └── customization.md
+│   │
+│   ├── 📁 frameworks/                # Framework-specific guides
+│   │   ├── vue3.md
+│   │   ├── react.md
+│   │   ├── angular.md
+│   │   └── vanilla.md
+│   │
+│   ├── 📁 api/                       # API documentation
+│   │   ├── components.md
+│   │   ├── composables.md
+│   │   ├── utils.md
+│   │   └── types.md
+│   │
+│   ├── 📁 examples/                  # Usage examples
+│   │   ├── forms/
+│   │   ├── layouts/
+│   │   ├── modals/
+│   │   └── tables/
+│   │
+│   └── index.md                      # Documentation home
+│
+├── 📁 stories/                       # Storybook stories
+│   ├── 📁 form/
+│   │   ├── Button.stories.ts
+│   │   ├── Input.stories.ts
 │   │   └── ...
-│   ├── styles/              # CSS & Design System
-│   │   ├── variables.css    # CSS Variables
-│   │   ├── base.css         # Base styles
-│   │   ├── components.css   # Component styles
-│   │   └── utilities.css    # Utility classes
-│   ├── composables/         # Vue Composables
-│   │   ├── useForm.js
-│   │   ├── useModal.js
+│   │
+│   ├── 📁 layout/
+│   │   ├── Container.stories.ts
 │   │   └── ...
-│   ├── utils/              # Helper functions
-│   │   ├── validation.js
-│   │   ├── formatting.js
+│   │
+│   ├── 📁 feedback/
+│   │   ├── Modal.stories.ts
+│   │   ├── Toast.stories.ts
 │   │   └── ...
-│   ├── App.vue
-│   └── main.js
-├── docs/                    # Dokumentasi
-│   ├── guide/
-│   ├── api/
-│   └── examples/
-├── .storybook/              # Storybook configuration
-├── tests/                   # Unit tests
-├── package.json
-├── vite.config.js
-└── README.md
+│   │
+│   └── 📁 data/
+│       ├── Table.stories.ts
+│       └── ...
+│
+├── 📁 tests/                         # Test files
+│   ├── 📁 unit/                      # Unit tests
+│   │   ├── components/
+│   │   ├── composables/
+│   │   └── utils/
+│   │
+│   ├── 📁 integration/               # Integration tests
+│   │   ├── form-workflow.spec.ts
+│   │   └── modal-interaction.spec.ts
+│   │
+│   └── 📁 e2e/                       # End-to-end tests
+│       ├── form.spec.ts
+│       └── navigation.spec.ts
+│
+├── 📁 .storybook/                    # Storybook configuration
+│   ├── main.ts                       # Main config
+│   ├── preview.ts                    # Preview config
+│   ├── manager.ts                    # Manager customization
+│   └── theme.ts                      # Theme customization
+│
+├── 📁 .github/                       # GitHub files
+│   ├── 📁 workflows/                 # CI/CD workflows
+│   │   ├── test.yml
+│   │   ├── build.yml
+│   │   ├── deploy.yml
+│   │   └── publish.yml
+│   │
+│   ├── 📁 ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   │
+│   └── PULL_REQUEST_TEMPLATE.md
+│
+├── 📁 dist/                          # Build output (generated)
+│   ├── 📁 esm/                       # ES Modules
+│   │   ├── components/
+│   │   ├── composables/
+│   │   ├── index.js
+│   │   └── index.d.ts
+│   │
+│   ├── 📁 cjs/                       # CommonJS
+│   │   ├── components/
+│   │   ├── index.js
+│   │   └── index.d.ts
+│   │
+│   ├── 📁 umd/                       # UMD bundle
+│   │   ├── use-ui.js
+│   │   └── use-ui.min.js
+│   │
+│   ├── 📁 types/                     # TypeScript types
+│   │   ├── components.d.ts
+│   │   ├── composables.d.ts
+│   │   └── index.d.ts
+│   │
+│   ├── 📁 styles/                    # CSS output
+│   │   ├── main.css
+│   │   ├── main.min.css
+│   │   ├── themes/
+│   │   └── tokens.css
+│   │
+│   └── README.md                     # Build output README
+│
+├── 📁 node_modules/                  # Dependencies (gitignored)
+│
+├── Configuration Files
+│   ├── package.json                  # Project metadata & scripts
+│   ├── package-lock.json             # Locked dependencies
+│   ├── pnpm-lock.yaml               # PNPM lock file
+│   ├── vite.config.ts                # Vite build config
+│   ├── tsconfig.json                 # TypeScript config
+│   ├── jsconfig.json                 # JavaScript config
+│   ├── vitest.config.ts              # Vitest config
+│   ├── .eslintrc.json               # ESLint config
+│   ├── .prettierrc                   # Prettier config
+│   ├── .stylelintrc.json             # StyleLint config
+│   ├── .editorconfig                 # Editor config
+│   ├── postcss.config.js             # PostCSS config
+│   ├── tailwind.config.js            # Tailwind config (if used)
+│   └── vitest.config.ts              # Vitest configuration
+│
+├── Documentation Files
+│   ├── README.md                     # Main documentation
+│   ├── CHANGELOG.md                  # Version changelog
+│   ├── CONTRIBUTING.md               # Contribution guide
+│   ├── CODE_OF_CONDUCT.md            # Code of conduct
+│   ├── LICENSE                       # MIT License
+│   ├── SECURITY.md                   # Security policy
+│   └── .gitignore                    # Git ignore rules
+
 ```
 
 ---
+
+### 📋 Directory Purposes
+
+#### `/src` - Source Code
+Main library code organized by component type and concern:
+
+| Directory | Purpose |
+|-----------|---------|
+| `components/` | Reusable UI components organized by category |
+| `composables/` | Reusable logic/state management (Vue 3 Composition API) |
+| `styles/` | Global styles, design tokens, and themes |
+| `utils/` | Utility functions and helpers |
+| `types/` | TypeScript type definitions |
+| `directives/` | Custom Vue directives |
+
+#### `/packages` - Framework Adapters
+Monorepo structure with framework-specific packages:
+
+```
+@use-ui/core          (base web components + types)
+@use-ui/vue3          (Vue 3 components)
+@use-ui/react         (React components)
+@use-ui/angular       (Angular components)
+@use-ui/web-components (Vanilla JS + Web Components)
+```
+
+#### `/docs` - Documentation
+Complete user and developer documentation:
+
+- `guide/` - Getting started guides
+- `frameworks/` - Framework-specific documentation
+- `api/` - Component and API reference
+- `examples/` - Usage examples and patterns
+
+#### `/stories` - Storybook
+Interactive component library and documentation:
+
+- Organized by component category
+- Live component preview
+- Props/events documentation
+- Interactive playground
+
+#### `/tests` - Test Suite
+Comprehensive testing:
+
+- `unit/` - Component unit tests
+- `integration/` - Workflow tests
+- `e2e/` - End-to-end tests
+
+#### `/dist` - Build Output (Generated)
+Production-ready compiled code:
+
+- `esm/` - ES Modules (modern imports)
+- `cjs/` - CommonJS (Node.js)
+- `umd/` - Universal Module (browser)
+- `types/` - TypeScript definitions
+- `styles/` - Compiled CSS
+
+---
+
+### 🔄 Component File Structure Example
+
+Each component typically has this structure:
+
+```
+components/form/Button/
+├── Button.vue          # Component implementation
+├── Button.spec.ts      # Unit tests
+├── Button.stories.ts   # Storybook story
+├── Button.types.ts     # Component types
+└── index.ts            # Export
+```
+
+**Inside a component file (Button.vue):**
+
+```vue
+<template>
+  <!-- HTML template -->
+</template>
+
+<script setup lang="ts">
+// TypeScript logic
+</script>
+
+<style scoped>
+/* Scoped styles */
+</style>
+```
+
+---
+
+### 📦 npm Scripts
+
+Located in `package.json`, these are main development scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "vite",                           # Dev server
+    "build": "vite build",                   # Production build
+    "build:lib": "vite build --lib",         # Library build
+    "build:types": "tsc --emitDeclarationOnly",  # Generate types
+    "preview": "vite preview",               # Preview build
+    
+    "storybook": "storybook dev",            # Start Storybook
+    "storybook:build": "storybook build",    # Build Storybook
+    
+    "test": "vitest",                        # Run all tests
+    "test:ui": "vitest --ui",                # Test UI mode
+    "test:coverage": "vitest --coverage",    # Coverage report
+    "test:e2e": "playwright test",           # E2E tests
+    
+    "lint": "eslint . --ext .vue,.js,.ts",   # Lint files
+    "lint:style": "stylelint src/**/*.{vue,css}",  # Lint styles
+    "format": "prettier --write src",        # Format code
+    
+    "type-check": "tsc --noEmit",            # Type checking
+    "validate": "npm run type-check && npm run lint && npm run test",
+    
+    "docs": "vitepress dev docs",            # Dev docs
+    "docs:build": "vitepress build docs",    # Build docs
+    
+    "publish": "npm run build && npm publish",  # Publish to npm
+    "release": "bumpp && npm publish"        # Release new version
+  }
+}
+```
+
+---
+
+### 🔧 Configuration Files Explained
+
+#### `vite.config.ts`
+```typescript
+// Build and dev server configuration
+- Library build settings
+- Component resolution
+- TypeScript support
+- CSS preprocessing
+```
+
+#### `tsconfig.json`
+```json
+// TypeScript compilation settings
+- Target: ES2020+
+- Module: ESNext
+- JSX: Vue
+- Type checking rules
+```
+
+#### `vitest.config.ts`
+```typescript
+// Test runner configuration
+- Jest-compatible test framework
+- Component testing setup
+- Coverage collection
+- UI testing library integration
+```
+
+#### `.eslintrc.json`
+```json
+// Code linting rules
+- Vue 3 + TypeScript support
+- Code style enforcement
+- Accessibility checks
+```
+
+#### `postcss.config.js`
+```javascript
+// CSS post-processing
+- Autoprefixer (browser prefixes)
+- CSS Variables support
+- Optimization
+```
+
+---
+
+### 📊 Build Output Structure
+
+**After running `npm run build`:**
+
+```
+dist/
+├── esm/                          # Modern JavaScript
+│   ├── components/
+│   │   ├── form/
+│   │   │   ├── Button.js
+│   │   │   ├── Button.d.ts
+│   │   │   └── index.js
+│   │   └── index.js
+│   ├── composables/
+│   ├── utils/
+│   ├── index.js
+│   └── index.d.ts
+│
+├── cjs/                          # Node.js compatible
+│   ├── components/
+│   ├── index.js
+│   └── index.d.ts
+│
+├── umd/                          # Browser global
+│   ├── use-ui.js                # Unminified (~40KB)
+│   └── use-ui.min.js            # Minified + gzipped (~15KB)
+│
+├── types/                        # TypeScript definitions
+│   ├── components.d.ts
+│   └── index.d.ts
+│
+└── styles/
+    ├── main.css                 # All styles bundled
+    ├── main.min.css
+    ├── tokens.css              # Design tokens only
+    ├── themes/
+    │   ├── light.css
+    │   └── dark.css
+    └── components.css           # Component styles only
+```
+
+---
+
+### 🎯 Development Workflow
+
+```
+Local Development:
+1. Edit files in src/
+2. vite dev (auto-reload)
+3. View changes instantly
+4. Write tests (tests/)
+5. Run npm run validate
+
+Storybook Documentation:
+1. Create Button.stories.ts
+2. npm run storybook
+3. View in interactive mode
+4. Document props/events
+
+Building for Production:
+1. npm run build
+2. dist/ folder created
+3. Ready for npm publish
+
+Publishing:
+1. Update CHANGELOG.md
+2. Bump version (package.json)
+3. npm publish
+4. Push to GitHub
+5. Create GitHub release
+```
+
+---
+
+### 🔗 Entry Points
+
+**For different use cases:**
+
+```javascript
+// Full build (everything)
+import * as UseUI from 'use-ui'
+
+// Specific component
+import { Button } from 'use-ui/components/form'
+
+// Composable
+import { useForm } from 'use-ui/composables'
+
+// Utility
+import { classnames } from 'use-ui/utils'
+
+// Types only
+import type { ButtonProps } from 'use-ui/types'
+
+// Styles
+import 'use-ui/dist/styles/main.css'
+import 'use-ui/dist/styles/themes/dark.css'
+```
+
+---
+
+## 🛠️ Setup Development
 
 ## 🛠️ Setup Development
 
