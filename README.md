@@ -50,7 +50,19 @@
   - [Development Workflow](#-development-workflow)
   - [Entry Points](#-entry-points)
 - [Setup Development](#-setup-development)
-- [Kontribusi](#kontribusi)
+  - [System Requirements](#-system-requirements)
+  - [Installation Steps](#-installation-steps)
+  - [IDE Configuration](#-ide-configuration)
+  - [Environment Variables](#-environment-variables)
+  - [Browser Development Tools](#-browser-development-tools)
+  - [Essential Scripts](#-essential-development-scripts)
+  - [Development Workflow](#-development-workflow)
+  - [Docker Development](#-docker-development-optional)
+  - [Troubleshooting](#-troubleshooting)
+  - [Commands Reference](#-useful-commands-reference)
+  - [Setup Verification](#-setup-verification-checklist)
+  - [Getting Help](#-getting-help)
+- [Kontribusi](#-kontribusi)
 - [Lisensi](#lisensi)
 
 ---
@@ -3267,48 +3279,519 @@ import 'use-ui/dist/styles/themes/dark.css'
 
 ## 🛠️ Setup Development
 
-## 🛠️ Setup Development
+### 🖥️ System Requirements
 
-### Prerequisites
-- Node.js 16+ 
-- npm, yarn, atau pnpm
+Before getting started, ensure your system meets these requirements:
 
-### Installation & Development
+#### Minimum Requirements
+- **OS:** macOS 10.15+, Windows 10+, Ubuntu 18.04+
+- **Node.js:** 16.0.0 or higher (recommended: 18+ or 20+)
+- **npm:** 7.0.0+ or Yarn 3.0+ or pnpm 7.0+
+- **Git:** 2.30.0+
+- **RAM:** 4GB minimum, 8GB recommended
+- **Disk Space:** 2GB for node_modules
+
+#### Recommended Setup
+- **Node.js:** 20.x LTS (Long Term Support)
+- **npm:** 10.x latest
+- **IDE:** VS Code with extensions
+- **Terminal:** zsh or bash with git integration
+
+#### Verify Installation
 
 ```bash
-# Clone repository
+# Check Node.js version
+node --version
+# Expected: v20.x.x or higher
+
+# Check npm version
+npm --version
+# Expected: 10.x.x or higher
+
+# Check Git version
+git --version
+# Expected: 2.30.0 or higher
+```
+
+---
+
+### 📦 Installation Steps
+
+#### Step 1: Clone Repository
+
+```bash
+# HTTPS method (recommended for most users)
 git clone https://github.com/yourusername/use-ui.git
 cd use-ui
 
-# Install dependencies
-npm install
+# SSH method (if SSH keys are configured)
+git clone git@github.com:yourusername/use-ui.git
+cd use-ui
 
-# Start development server
-npm run dev
-
-# Start Storybook
-npm run storybook
-
-# Run tests
-npm run test
-
-# Build library
-npm run build
-
-# Build documentation
-npm run docs:build
+# GitHub CLI method
+gh repo clone yourusername/use-ui
+cd use-ui
 ```
 
-### IDE Recommended
+#### Step 2: Install Dependencies
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (disable Vetur).
+```bash
+# Using npm (default)
+npm install
+# or
+npm ci  # Cleaner install from package-lock.json
 
-### Browser DevTools
+# Using yarn
+yarn install
+# or
+yarn install --frozen-lockfile
 
-- **Chrome/Edge:** [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- **Firefox:** [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+# Using pnpm (faster, more efficient)
+pnpm install
+```
+
+**Verify Installation:**
+```bash
+npm list use-ui
+# Should show the local package installed
+```
+
+#### Step 3: Initialize Environment
+
+```bash
+# Copy environment file (if exists)
+cp .env.example .env.local
+
+# Install git hooks (husky pre-commit hooks)
+npm run prepare
+
+# Verify setup
+npm run validate
+```
+
+#### Step 4: Start Development
+
+```bash
+# Start dev server (Vite)
+npm run dev
+# Opens at http://localhost:5173
+
+# In another terminal, start Storybook
+npm run storybook
+# Opens at http://localhost:6006
+```
 
 ---
+
+### 🔧 IDE Configuration
+
+#### VS Code Setup (Recommended)
+
+**1. Install VS Code Extensions:**
+
+```bash
+# Install extensions via VS Code CLI
+code --install-extension Vue.volar                    # Vue 3 support
+code --install-extension dbaeumer.vscode-eslint       # ESLint
+code --install-extension esbenp.prettier-vscode       # Prettier
+code --install-extension stylelint.vscode-stylelint   # StyleLint
+code --install-extension bradlc.vscode-tailwindcss    # Tailwind CSS
+code --install-extension foxundermoon.shell-format    # Shell script formatter
+code --install-extension ms-playwright.playwright     # Playwright
+```
+
+**2. Recommended Extensions (Optional):**
+
+- [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) - API testing
+- [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) - HTTP requests
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - Git integration
+- [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) - Inline errors
+- [Console Ninja](https://marketplace.visualstudio.com/items?itemName=wallabyjs.console-ninja) - Console debugging
+- [Test Explorer UI](https://marketplace.visualstudio.com/items?itemName=hbenl.test-explorer) - Test runner UI
+
+**3. VS Code Settings (.vscode/settings.json):**
+
+```json
+{
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.rulers": [80, 100, 120],
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "vue.server.performanceWarnings": false
+}
+```
+
+**4. Launch Configuration (.vscode/launch.json):**
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMaps": true,
+      "runtimeExecutable": "chromium"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Tests",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test:debug"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
+```
+
+---
+
+### 🌍 Environment Variables
+
+Create `.env.local` file in project root:
+
+```bash
+# Development Configuration
+VITE_API_URL=http://localhost:3000
+VITE_ENV=development
+VITE_DEBUG=true
+
+# Build Configuration
+VITE_BUILD_TARGET=modules
+VITE_SOURCEMAP=true
+
+# Storybook Configuration
+STORYBOOK_THEME=light
+STORYBOOK_DOCS=true
+
+# Optional: GitHub Token for Releases
+GITHUB_TOKEN=your_token_here
+
+# Optional: NPM Token for Publishing
+NPM_TOKEN=your_token_here
+```
+
+---
+
+### 🌐 Browser Development Tools
+
+#### Chrome/Edge
+```bash
+# Install Vue DevTools for Chrome/Edge
+# Visit: https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
+# Click "Add to Chrome" or "Add to Edge"
+
+# Or use the standalone app
+npm install -g @vue/devtools
+vue-devtools
+```
+
+#### Firefox
+```bash
+# Install Vue DevTools for Firefox
+# Visit: https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/
+# Click "Add to Firefox"
+```
+
+#### Chrome Extensions
+```bash
+# Recommended additional extensions:
+# 1. React DevTools (for React testing)
+#    https://chromewebstore.google.com/detail/react-developer-tools/
+# 
+# 2. Angular DevTools (for Angular testing)
+#    https://chromewebstore.google.com/detail/angular-devtools/
+# 
+# 3. Lighthouse (Performance auditing)
+#    Built-in to Chrome DevTools (F12 → Lighthouse tab)
+# 
+# 4. Web Vitals (Performance monitoring)
+#    https://chromewebstore.google.com/detail/web-vitals/
+```
+
+---
+
+### 📝 Essential Development Scripts
+
+```bash
+# === Development ===
+npm run dev              # Start dev server (Vite)
+npm run preview          # Preview production build
+npm run storybook        # Start Storybook dev server
+
+# === Building ===
+npm run build            # Build for production
+npm run build:lib        # Build library distribution
+npm run build:types      # Generate TypeScript types
+npm run storybook:build  # Build Storybook static
+
+# === Testing ===
+npm run test             # Run all tests
+npm run test:ui          # Run tests with UI
+npm run test:coverage    # Generate coverage report
+npm run test:watch       # Watch mode for development
+npm run test:e2e         # Run E2E tests
+npm run test:debug       # Debug tests
+
+# === Code Quality ===
+npm run lint             # Lint JavaScript/TypeScript/Vue
+npm run lint:style       # Lint CSS/SCSS
+npm run format           # Format code with Prettier
+npm run type-check       # TypeScript type checking
+
+# === Validation ===
+npm run validate         # Run all checks (lint, type-check, test)
+
+# === Documentation ===
+npm run docs             # Dev docs server (Vitepress)
+npm run docs:build       # Build static docs
+
+# === Publishing ===
+npm run publish          # Build and publish to npm
+npm run release          # Bumpp version and publish
+```
+
+---
+
+### 🚀 Development Workflow
+
+#### Daily Development Cycle
+
+```bash
+# 1. Start dev environment
+npm run dev              # Terminal 1: Dev server
+npm run storybook        # Terminal 2: Storybook
+
+# 2. Create feature branch
+git checkout -b feature/my-feature
+
+# 3. Edit files (auto-reload enabled)
+# Files in src/ automatically reload in browser
+
+# 4. Write tests alongside code
+npm run test:watch      # Terminal 3: Watch tests
+
+# 5. Check code quality before commit
+npm run validate
+
+# 6. Commit changes
+git add .
+git commit -m "feat: Add my feature"
+
+# 7. Push and create PR
+git push origin feature/my-feature
+```
+
+#### Adding a New Component
+
+```bash
+# 1. Create component directory
+mkdir -p src/components/form/MyComponent
+
+# 2. Create component files
+touch src/components/form/MyComponent/MyComponent.vue
+touch src/components/form/MyComponent/MyComponent.spec.ts
+touch src/components/form/MyComponent/MyComponent.stories.ts
+touch src/components/form/MyComponent/index.ts
+
+# 3. Add to index exports
+echo "export { default as MyComponent } from './MyComponent.vue'" > src/components/form/MyComponent/index.ts
+
+# 4. Update parent index
+# Add to src/components/form/index.ts
+
+# 5. Write tests and stories
+
+# 6. Validate
+npm run validate
+```
+
+---
+
+### 🐳 Docker Development (Optional)
+
+#### Dockerfile for Development
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy source
+COPY . .
+
+# Expose ports
+EXPOSE 5173 6006
+
+# Default to dev server
+CMD ["npm", "run", "dev"]
+```
+
+#### Docker Compose
+
+```yaml
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+      - "6006:6006"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    command: npm run dev
+
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6006:6006"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run storybook
+```
+
+**Usage:**
+```bash
+# Start development in Docker
+docker-compose up
+
+# Or specific service
+docker-compose up dev
+docker-compose up storybook
+
+# Stop
+docker-compose down
+```
+
+---
+
+### 🔍 Troubleshooting
+
+#### Common Issues & Solutions
+
+| Issue | Solution |
+|-------|----------|
+| **Port 5173 already in use** | `npm run dev -- --port 5174` or kill the process using the port |
+| **npm install fails** | Clear cache: `npm cache clean --force`, then `npm install` |
+| **Storybook won't start** | Delete `.storybook-build`, run `npm run storybook:build` |
+| **Tests timeout** | Increase timeout: `npm run test -- --testTimeout=10000` |
+| **TypeScript errors but code runs** | Run `npm run type-check` to see all errors, or disable in IDE |
+| **Node modules corrupted** | Delete `node_modules` & `package-lock.json`, then `npm install` |
+| **Git hooks not running** | Run `npm run prepare` to reinstall husky hooks |
+| **Vite cache issues** | Delete `.vite` folder, restart dev server |
+| **CSS not loading** | Check import order in Vue files, ensure CSS is imported before use |
+| **Vue DevTools not showing** | Check if Vue 3 app is detected, refresh browser |
+
+---
+
+### 📚 Useful Commands Reference
+
+```bash
+# === Version Management ===
+npm run release          # Semantic versioning + publish
+npm run release:major    # Major version bump
+npm run release:minor    # Minor version bump
+npm run release:patch    # Patch version bump
+
+# === Git ===
+git status              # Check changes
+git diff                # View changes
+git log --oneline       # View commit history
+git branch -a           # List all branches
+
+# === Node Version Management (nvm) ===
+nvm list                # List installed Node versions
+nvm install 20          # Install Node 20
+nvm use 20              # Switch to Node 20
+nvm alias default 20    # Set default to Node 20
+
+# === Package Management ===
+npm outdated            # List outdated packages
+npm update              # Update packages
+npm audit               # Check security vulnerabilities
+npm audit fix           # Auto-fix vulnerabilities
+npm prune               # Remove unused dependencies
+
+# === Performance Analysis ===
+npm run build -- --report          # Analyze build size
+npm run test:coverage             # Check test coverage
+npm run type-check                # TypeScript errors
+```
+
+---
+
+### ✅ Setup Verification Checklist
+
+After completing setup, verify everything works:
+
+- [ ] Node.js 16+ installed (`node --version`)
+- [ ] Git configured (`git config --global user.name`)
+- [ ] Repository cloned successfully
+- [ ] Dependencies installed (`npm list`)
+- [ ] Dev server starts (`npm run dev` → http://localhost:5173)
+- [ ] Storybook starts (`npm run storybook` → http://localhost:6006)
+- [ ] Tests pass (`npm test`)
+- [ ] Linting passes (`npm run lint`)
+- [ ] Type checking passes (`npm run type-check`)
+- [ ] VS Code extensions installed
+- [ ] Vue DevTools installed in browser
+- [ ] Pre-commit hooks working (`git commit --help`)
+
+---
+
+### 🆘 Getting Help
+
+If you encounter issues:
+
+1. **Check existing issues:** https://github.com/yourusername/use-ui/issues
+2. **Search documentation:** See `docs/` folder
+3. **Discord Community:** [Join our community](#)
+4. **Email support:** support@use-ui.dev
+5. **Create issue:** Include Node version, OS, error logs
+
+---
+
+## 🤝 Kontribusi
 
 ## 🤝 Kontribusi
 
