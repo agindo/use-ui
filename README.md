@@ -29,6 +29,17 @@
   - [Composables & Utilities](#-composables--utilities)
 - [Dokumentasi API](#dokumentasi-api)
 - [Dukungan Lintas Framework](#dukungan-lintas-framework)
+  - [Cross-Framework Strategy](#-cross-framework-strategy)
+  - [Architecture Overview](#-architecture-overview)
+  - [How It Works](#-how-it-works)
+  - [Framework Comparison](#-framework-comparison)
+  - [Installation & Setup](#-installation--setup)
+  - [Implementation Examples](#-implementation-examples)
+  - [Theme & Styling](#-theme--styling-across-frameworks)
+  - [Interoperability & Migration](#-interoperability--migration)
+  - [Testing Across Frameworks](#-testing-across-frameworks)
+  - [Performance Considerations](#-performance-considerations)
+  - [When to Use Each Framework](#-when-to-use-each-framework)
 - [Struktur Proyek](#struktur-proyek)
 - [Setup Development](#setup-development)
 - [Kontribusi](#kontribusi)
@@ -1935,91 +1946,750 @@ export function useTheme() {
 
 ## 🌐 Dukungan Lintas Framework
 
-### Instalasi Framework-Specific
+### 🎯 Cross-Framework Strategy
 
-#### Vue 3
-```bash
-npm install use-ui @use-ui/vue3
+**use-ui** didukung oleh filosofi framework-agnostic yang memungkinkan developer menggunakan component library yang sama di berbagai environment modern:
+
+| Aspek | Deskripsi |
+|-------|-----------|
+| **Foundation** | Web Components (Custom Elements API) + HTML + CSS |
+| **Wrapper Layers** | Framework-specific adapters untuk Vue 3, React, Angular |
+| **API Consistency** | Unified naming dan behavior across frameworks |
+| **Styling** | CSS Variables untuk universal theming |
+| **Performance** | Optimized untuk setiap framework runtime |
+
+---
+
+### 🏗️ Architecture Overview
+
+```
+┌─────────────────────────────────────────────┐
+│       Application Layer                      │
+│  (Vue 3 / React / Angular / Vanilla JS)     │
+└──────────────┬──────────────────────────────┘
+               │
+      ┌────────┼────────┐
+      │        │        │
+   ┌──▼──┐ ┌──▼──┐ ┌───▼──┐
+   │ Vue │ │React│ │Angular│
+   └──┬──┘ └──┬──┘ └───┬──┘
+      │   (Framework-Specific Adapters)
+      │        │        │
+      └────────┼────────┘
+               │
+    ┌──────────▼──────────┐
+    │ Web Components API  │
+    │  (Custom Elements)  │
+    └──────────┬──────────┘
+               │
+    ┌──────────▼──────────┐
+    │  HTML + CSS         │
+    │  + CSS Variables    │
+    └─────────────────────┘
 ```
 
-#### React
-```bash
-npm install use-ui @use-ui/react
+---
+
+### 🔄 How It Works
+
+#### Layer 1: Foundation (Web Components)
+
+Semua komponen dibangun sebagai **Web Components** yang memanfaatkan:
+
+```javascript
+// Web Components are framework-agnostic
+class UseButton extends HTMLElement {
+  connectedCallback() {
+    this.render()
+    this.attachEventListeners()
+  }
+
+  render() {
+    this.innerHTML = `
+      <button class="use-button ${this.getAttribute('type')}">
+        <slot></slot>
+      </button>
+    `
+  }
+
+  attachEventListeners() {
+    const button = this.querySelector('button')
+    button.addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('click'))
+    })
+  }
+}
+
+customElements.define('use-button', UseButton)
 ```
 
-#### Angular
-```bash
-npm install use-ui @use-ui/angular
+**Benefits:**
+- ✅ Framework-independent
+- ✅ Works in any environment
+- ✅ Native browser API
+- ✅ Zero framework dependencies
+
+#### Layer 2: Framework Adapters
+
+Framework-specific wrappers menyediakan idiomatik API untuk setiap framework:
+
+**Vue 3 Adapter:**
+```vue
+<template>
+  <use-button 
+    :ref="buttonRef"
+    :type="type"
+    @click="handleClick"
+  >
+    <slot>{{ label }}</slot>
+  </use-button>
+</template>
+
+<script setup>
+// Vue 3 Composition API integration
+const buttonRef = ref(null)
+const handleClick = (event) => {
+  emit('click', event)
+}
+</script>
 ```
 
-#### Vanilla JS (Web Components)
-```bash
-npm install use-ui
-```
-
-### Contoh Implementasi
-
-#### React
+**React Adapter:**
 ```jsx
-import { UseButton, UseInput } from '@use-ui/react'
-import '@use-ui/react/dist/style.css'
-
-export function MyComponent() {
-  const [name, setName] = useState('')
+export const UseButton = forwardRef(({ 
+  type, 
+  onClick, 
+  children 
+}, ref) => {
+  useEffect(() => {
+    if (ref?.current) {
+      ref.current.setAttribute('type', type)
+    }
+  }, [type])
 
   return (
-    <>
-      <UseInput 
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter your name"
-      />
-      <UseButton onClick={() => alert(name)}>
-        Submit
-      </UseButton>
-    </>
+    <use-button 
+      ref={ref}
+      onClick={onClick}
+    >
+      {children}
+    </use-button>
   )
+})
+```
+
+**Angular Adapter:**
+```typescript
+@Component({
+  selector: 'use-button',
+  template: `
+    <button 
+      class="use-button"
+      [class]="type"
+      (click)="onClick.emit($event)"
+    >
+      <ng-content></ng-content>
+    </button>
+  `
+})
+export class UseButtonComponent {
+  @Input() type: 'primary' | 'secondary' = 'primary'
+  @Output() onClick = new EventEmitter<Event>()
 }
 ```
 
-#### Angular
-```typescript
-import { Component } from '@angular/core'
-import { UseUIModule } from '@use-ui/angular'
+---
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <use-button (click)="handleClick()">
-      Click Me
-    </use-button>
-  `,
-  standalone: true,
-  imports: [UseUIModule]
+### 📊 Framework Comparison
+
+#### API Consistency Matrix
+
+| Feature | Vue 3 | React | Angular | Vanilla JS |
+|---------|-------|-------|---------|-----------|
+| **Props** | `:prop="value"` | `prop={value}` | `[prop]="value"` | `setAttribute()` |
+| **Events** | `@click="handler"` | `onClick={handler}` | `(click)="handler()"` | `addEventListener()` |
+| **Slots** | `<slot>` | `children` | `<ng-content>` | N/A |
+| **Styles** | CSS Modules | CSS-in-JS | Angular styles | CSS classes |
+| **Two-way Binding** | `v-model` | state + onChange | `[(ngModel)]` | Manual |
+| **Computed** | `computed()` | `useMemo()` | getters | N/A |
+| **Side Effects** | `watch()` | `useEffect()` | `ngOnInit()` | Manual |
+
+---
+
+### 🔧 Installation & Setup
+
+#### Framework-Specific Packages
+
+```bash
+# Vue 3 - Full framework support
+npm install use-ui @use-ui/vue3
+
+# React - React components with hooks
+npm install use-ui @use-ui/react
+
+# Angular - Angular components
+npm install use-ui @use-ui/angular
+
+# Vanilla JS - Web Components only
+npm install use-ui
+```
+
+#### Version Requirements
+
+| Framework | Minimum Version | Recommended | Tested |
+|-----------|-----------------|-------------|--------|
+| **Vue** | 3.3.0 | 3.4+ | 3.4, 3.5 |
+| **React** | 18.0.0 | 18.2+ | 18.2, 19 |
+| **Angular** | 15.0.0 | 17+ | 17, 18 |
+| **TypeScript** | 4.7.0 | 5.0+ | 5.0, 5.2 |
+| **Node** | 16.0.0 | 18+ | 18, 20 |
+
+---
+
+### 💻 Implementation Examples
+
+#### Vue 3 - Composition API Pattern
+
+```vue
+<template>
+  <form @submit.prevent="handleSubmit">
+    <UseInput 
+      v-model="formData.email"
+      type="email"
+      label="Email"
+      @blur="validateEmail"
+    />
+    <UseInput 
+      v-model="formData.password"
+      type="password"
+      label="Password"
+    />
+    <UseButton 
+      type="primary"
+      :disabled="isSubmitting"
+      :loading="isSubmitting"
+    >
+      Sign In
+    </UseButton>
+  </form>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { UseInput, UseButton } from '@use-ui/vue3'
+import { useForm } from '@use-ui/vue3/composables'
+
+const { values: formData, submit } = useForm({
+  email: '',
+  password: ''
 })
-export class AppComponent {
-  handleClick() {
-    console.log('Button clicked!')
+
+const isSubmitting = ref(false)
+
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  await submit()
+  isSubmitting.value = false
+}
+
+const validateEmail = () => {
+  // Email validation
+}
+</script>
+
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 400px;
+}
+</style>
+```
+
+#### React - Hooks Pattern
+
+```jsx
+import { useState } from 'react'
+import { UseInput, UseButton } from '@use-ui/react'
+import { useForm } from '@use-ui/react/hooks'
+import '@use-ui/react/dist/style.css'
+
+export function LoginForm() {
+  const { values, errors, handleChange, handleSubmit } = useForm({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: async (values) => {
+      console.log('Submitting:', values)
+    }
+  })
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    await handleSubmit()
+    setIsLoading(false)
+  }
+
+  return (
+    <form onSubmit={onSubmit} style={styles.form}>
+      <UseInput
+        name="email"
+        type="email"
+        label="Email"
+        value={values.email}
+        onChange={handleChange}
+        error={errors.email}
+      />
+      <UseInput
+        name="password"
+        type="password"
+        label="Password"
+        value={values.password}
+        onChange={handleChange}
+        error={errors.password}
+      />
+      <UseButton
+        type="primary"
+        disabled={isLoading}
+        loading={isLoading}
+      >
+        Sign In
+      </UseButton>
+    </form>
+  )
+}
+
+const styles = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--spacing-md)',
+    maxWidth: '400px'
   }
 }
 ```
 
-#### Vanilla JavaScript
-```html
-<script src="https://cdn.jsdelivr.net/npm/use-ui/dist/use-ui.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui/dist/style.css">
+#### Angular - Typed Components Pattern
 
-<script>
-  const button = document.createElement('use-button')
-  button.textContent = 'Click Me'
-  button.addEventListener('click', () => {
-    console.log('Button clicked!')
-  })
-  document.body.appendChild(button)
-</script>
+```typescript
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UseUIModule } from '@use-ui/angular'
+
+@Component({
+  selector: 'app-login-form',
+  template: `
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <use-input
+        label="Email"
+        type="email"
+        formControlName="email"
+        [error]="getErrorMessage('email')"
+      ></use-input>
+      
+      <use-input
+        label="Password"
+        type="password"
+        formControlName="password"
+        [error]="getErrorMessage('password')"
+      ></use-input>
+      
+      <use-button
+        type="primary"
+        [disabled]="isSubmitting"
+        [loading]="isSubmitting"
+      >
+        Sign In
+      </use-button>
+    </form>
+  `,
+  styles: [`
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      max-width: 400px;
+    }
+  `],
+  standalone: true,
+  imports: [UseUIModule]
+})
+export class LoginFormComponent implements OnInit {
+  loginForm: FormGroup
+  isSubmitting = false
+
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    })
+  }
+
+  ngOnInit() {}
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.isSubmitting = true
+      // Submit logic
+    }
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.loginForm.get(fieldName)
+    if (field?.hasError('required')) {
+      return `${fieldName} is required`
+    }
+    if (fieldName === 'email' && field?.hasError('email')) {
+      return 'Invalid email'
+    }
+    return ''
+  }
+}
+```
+
+#### Vanilla JavaScript - Web Components Direct
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui/dist/style.css">
+</head>
+<body>
+  <form id="login-form">
+    <use-input
+      id="email-input"
+      type="email"
+      label="Email"
+      placeholder="your@email.com"
+    ></use-input>
+
+    <use-input
+      id="password-input"
+      type="password"
+      label="Password"
+      placeholder="Enter password"
+    ></use-input>
+
+    <use-button id="submit-btn" type="primary">
+      Sign In
+    </use-button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/use-ui/dist/use-ui.js"></script>
+  <script>
+    const form = document.getElementById('login-form')
+    const emailInput = document.getElementById('email-input')
+    const passwordInput = document.getElementById('password-input')
+    const submitBtn = document.getElementById('submit-btn')
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      
+      const email = emailInput.value
+      const password = passwordInput.value
+      
+      console.log('Submitting:', { email, password })
+      
+      // Submit logic
+    })
+
+    submitBtn.addEventListener('click', () => {
+      // Custom click handler
+    })
+  </script>
+
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      max-width: 400px;
+    }
+  </style>
+</body>
+</html>
 ```
 
 ---
+
+### 🎨 Theme & Styling Across Frameworks
+
+#### Unified CSS Variables
+
+Semua framework menggunakan **CSS Custom Properties (CSS Variables)** untuk theming:
+
+```css
+/* themes/light.css */
+:root {
+  --color-primary: #3B82F6;
+  --color-secondary: #10B981;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+  
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  --font-size-base: 1rem;
+  --spacing-base: 8px;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* themes/dark.css */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #60A5FA;
+    --color-secondary: #34D399;
+    /* ... */
+  }
+}
+```
+
+#### Framework-Specific Theme Implementation
+
+**Vue 3:**
+```vue
+<script setup>
+import { provide } from 'vue'
+import { useTheme } from '@use-ui/vue3/composables'
+
+const { toggleDarkMode, isDark } = useTheme()
+
+provide('isDark', isDark)
+</script>
+
+<template>
+  <div :class="{ 'dark-mode': isDark }">
+    <button @click="toggleDarkMode">
+      Toggle Dark Mode
+    </button>
+  </div>
+</template>
+```
+
+**React:**
+```jsx
+import { createContext, useState } from 'react'
+import { useTheme } from '@use-ui/react/hooks'
+
+export const ThemeContext = createContext()
+
+export function ThemeProvider({ children }) {
+  const { isDark, toggleDarkMode } = useTheme()
+
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleDarkMode }}>
+      <div className={isDark ? 'dark-mode' : 'light-mode'}>
+        {children}
+      </div>
+    </ThemeContext.Provider>
+  )
+}
+```
+
+**Angular:**
+```typescript
+@Injectable({ providedIn: 'root' })
+export class ThemeService {
+  private darkMode$ = new BehaviorSubject(false)
+
+  toggleDarkMode() {
+    const current = this.darkMode$.value
+    this.darkMode$.next(!current)
+  }
+
+  isDarkMode$() {
+    return this.darkMode$.asObservable()
+  }
+}
+```
+
+---
+
+### 🔗 Interoperability & Migration
+
+#### Using Multiple Frameworks in One App
+
+```html
+<!-- Vue 3 component area -->
+<div id="vue-app"></div>
+
+<!-- React component area -->
+<div id="react-app"></div>
+
+<!-- Shared Web Components (work everywhere) -->
+<use-button id="shared-button">
+  Shared across frameworks
+</use-button>
+```
+
+#### Migrating Between Frameworks
+
+##### Step 1: Use Web Components (Foundation)
+
+```javascript
+// All frameworks can use web components
+const button = document.createElement('use-button')
+button.setAttribute('type', 'primary')
+button.textContent = 'Click Me'
+```
+
+##### Step 2: Gradually Adopt Framework Wrapper
+
+```vue
+<!-- Vue 3: Replace web component usage with Vue adapter -->
+<UseButton type="primary">Click Me</UseButton>
+```
+
+##### Step 3: Full Migration Complete
+
+Benefits:
+- ✅ Gradual migration without rewriting
+- ✅ No dependency lock-in
+- ✅ Easy framework switching
+- ✅ Consistent component API
+
+---
+
+### 🧪 Testing Across Frameworks
+
+#### Unified Component Testing
+
+```javascript
+// Jest + Testing Library (works across frameworks)
+
+import { render, screen } from '@testing-library/vue'
+import userEvent from '@testing-library/user-event'
+import { UseButton } from '@use-ui/vue3'
+
+describe('UseButton', () => {
+  it('should emit click event', async () => {
+    const { emitted } = render(UseButton, {
+      slots: { default: 'Click Me' }
+    })
+
+    const button = screen.getByRole('button')
+    await userEvent.click(button)
+
+    expect(emitted().click).toBeTruthy()
+  })
+})
+```
+
+#### React Testing
+
+```javascript
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { UseButton } from '@use-ui/react'
+
+describe('UseButton', () => {
+  it('should call onClick handler', async () => {
+    const onClick = jest.fn()
+    render(<UseButton onClick={onClick}>Click Me</UseButton>)
+
+    const button = screen.getByRole('button')
+    await userEvent.click(button)
+
+    expect(onClick).toHaveBeenCalled()
+  })
+})
+```
+
+#### E2E Testing
+
+```javascript
+// Playwright (works across all frameworks)
+
+import { test, expect } from '@playwright/test'
+
+test('UseButton interaction', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+  
+  const button = page.locator('use-button')
+  await expect(button).toBeVisible()
+  
+  const clickPromise = page.waitForEvent('console')
+  await button.click()
+  
+  const log = await clickPromise
+  expect(log.text()).toContain('Button clicked')
+})
+```
+
+---
+
+### ⚡ Performance Considerations
+
+#### Framework-Specific Optimization
+
+| Framework | Key Optimization | Bundle Impact | Runtime |
+|-----------|------------------|----------------|---------|
+| **Vue 3** | Tree-shaking composables | +0KB | ✅ Fastest |
+| **React** | Code splitting hooks | +2KB | ✅ Fast |
+| **Angular** | Ivy compilation | +3KB | ✅ Comparable |
+| **Vanilla** | Direct Web Components | -2KB | ✅ Fastest |
+
+#### Bundle Size Comparison
+
+```
+Vue 3:        ~22KB (use-ui core + Vue adapter)
+React:        ~24KB (use-ui core + React adapter)
+Angular:      ~25KB (use-ui core + Angular adapter)
+Vanilla JS:   ~20KB (use-ui core only)
+
+All: Tree-shakeable → ~15KB with single component
+```
+
+---
+
+### 🚀 When to Use Each Framework
+
+#### Use Vue 3 when:
+- ✅ You need reactive, two-way binding
+- ✅ You prefer template syntax
+- ✅ You want smallest bundle with features
+- ✅ Building interactive dashboards
+
+#### Use React when:
+- ✅ You have large ecosystem requirements
+- ✅ You prefer functional programming
+- ✅ You need maximum community support
+- ✅ Building complex state management
+
+#### Use Angular when:
+- ✅ You need full-featured framework
+- ✅ You have TypeScript-first requirements
+- ✅ You need dependency injection
+- ✅ Building enterprise applications
+
+#### Use Vanilla JS when:
+- ✅ You don't need framework overhead
+- ✅ You have simple component needs
+- ✅ You need framework-agnostic solution
+- ✅ Building micro-frontends
+
+---
+
+### 📚 Framework Documentation Links
+
+- [Vue 3 Guide](./docs/frameworks/vue3.md)
+- [React Guide](./docs/frameworks/react.md)
+- [Angular Guide](./docs/frameworks/angular.md)
+- [Vanilla JS Guide](./docs/frameworks/vanilla.md)
+- [Migration Guide](./docs/frameworks/migration.md)
+
+---
+
+## 📁 Struktur Proyek
 
 ## 📁 Struktur Proyek
 
