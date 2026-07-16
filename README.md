@@ -276,20 +276,196 @@
 
 ## 📦 Instalasi
 
-### NPM
+### Prerequisites
+
+Sebelum menginstal use-ui, pastikan Anda memiliki:
+
+| Requirement | Minimum Version | Catatan |
+|-------------|-----------------|--------|
+| **Node.js** | 16.0.0 | Untuk npm/yarn/pnpm |
+| **npm/yarn/pnpm** | Latest | Package manager |
+| **Framework** | Latest LTS | Vue 3.3+, React 18+, Angular 15+, atau Vanilla JS |
+
+Cek versi Node.js Anda:
+```bash
+node --version
+npm --version
+```
+
+### Installation Methods
+
+#### 1️⃣ NPM (Recommended)
 ```bash
 npm install use-ui
 ```
 
-### Yarn
+#### 2️⃣ Yarn
 ```bash
 yarn add use-ui
 ```
 
-### PNPM
+#### 3️⃣ PNPM
 ```bash
 pnpm add use-ui
 ```
+
+#### 4️⃣ CDN (Vanilla JS)
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/style.css">
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/use-ui.umd.js"></script>
+```
+
+#### 5️⃣ From Git (Development)
+```bash
+git clone https://github.com/yourusername/use-ui.git
+cd use-ui
+npm install
+npm run build
+npm link  # Link ke project lokal
+```
+
+### Framework-Specific Installation
+
+#### Vue 3
+```bash
+npm install use-ui vue@^3.3.0
+```
+
+#### React
+```bash
+npm install use-ui @use-ui/react react@^18.0.0 react-dom@^18.0.0
+```
+
+#### Angular
+```bash
+npm install use-ui @use-ui/angular @angular/core@^15.0.0
+```
+
+#### Vanilla JavaScript (Web Components)
+```bash
+npm install use-ui
+```
+Atau gunakan CDN link di atas.
+
+### Verification
+
+Setelah instalasi, verifikasi dengan:
+
+```bash
+# Check package installation
+npm list use-ui
+
+# Output should show:
+# use-ui@1.0.0
+```
+
+### Installation Options
+
+#### Full Bundle (Recommended)
+```bash
+npm install use-ui
+```
+- Ukuran: ~25KB gzip
+- Semua komponen included
+- Best untuk most use cases
+
+#### Tree-Shakeable Import
+```bash
+npm install use-ui
+```
+
+Kemudian import hanya komponen yang dibutuhkan:
+
+```javascript
+// Vue 3
+import { UseButton, UseInput } from 'use-ui'
+
+// React
+import { UseButton, UseInput } from '@use-ui/react'
+```
+
+#### Peer Dependencies
+
+Pastikan Anda memiliki peer dependencies yang diperlukan:
+
+```json
+{
+  "vue": "^3.3.0",      // Untuk Vue 3
+  "react": "^18.0.0",   // Untuk React
+  "react-dom": "^18.0.0" // Untuk React
+}
+```
+
+### Troubleshooting
+
+#### Problem: Module not found error
+```bash
+# Solution: Clear node_modules dan reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+#### Problem: CSS not loading
+```javascript
+// Make sure to import CSS
+import 'use-ui/dist/style.css'
+
+// Or add to your global styles
+@import 'use-ui/dist/style.css';
+```
+
+#### Problem: Compatibility issues
+```bash
+# Check Node.js version
+node --version  # Should be 16.0.0+
+
+# Update npm
+npm install -g npm@latest
+
+# Reinstall dependencies
+npm ci  # Use npm ci instead of npm install for CI/CD
+```
+
+#### Problem: Build errors
+
+Jika mengalami build error, lihat dokumentasi framework:
+- [Vue 3 Setup](https://vuejs.org/guide/installation.html)
+- [React Setup](https://react.dev/learn/installation)
+- [Angular Setup](https://angular.io/guide/setup-local)
+- [Vite Setup](https://vitejs.dev/guide/)
+
+### Uninstall
+
+Jika perlu uninstall use-ui:
+
+```bash
+npm uninstall use-ui
+```
+
+### Update ke Version Terbaru
+
+```bash
+# Check available versions
+npm view use-ui versions
+
+# Update ke latest version
+npm install use-ui@latest
+
+# Or update to specific version
+npm install use-ui@1.2.0
+```
+
+### Next Steps
+
+Setelah instalasi berhasil:
+
+1. **Quick Start** - Lihat [Quick Start](#quick-start) section
+2. **Documentation** - Baca [Dokumentasi API](#dokumentasi-api)
+3. **Examples** - Lihat contoh di [Framework Examples](#-dukungan-lintas-framework)
+4. **Storybook** - Jelajahi komponen interaktif: `npm run storybook`
 
 ---
 
