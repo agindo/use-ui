@@ -2,7 +2,7 @@
 
 **use-ui** adalah library komponen template UI modern yang dirancang untuk kemudahan penggunaan dan fleksibilitas tinggi. Proyek ini menggabungkan best practices dalam **Design System**, **Dokumentasi API**, dan **Implementasi lintas framework**.
 
-> ✨ **Fokus:** HTML + CSS yang elegan | **Tujuan:** Mudah digunakan across platforms | **Status:** Aktif dikembangkan
+> ✨ **Current Focus:** Vue 3 | **Status:** Production Ready | **Future:** React, Angular, Vanilla JS (Coming Soon)
 
 ---
 
@@ -172,73 +172,83 @@
 
 ## 📦 Features List
 
+**Current Status:** Vue 3 Full Support | React, Angular, Vanilla JS Coming Soon
+
 ### ✅ Komponen Form (Form Components)
 
-| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
-|----------|-----------|--------|-------|-------|---------|
-| **UseButton** | Button dengan multiple variants & sizes | ✅ Available | ✅ | ✅ | ✅ |
-| **UseInput** | Text input field dengan validation | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSelect** | Dropdown selection component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseCheckbox** | Checkbox control | ✅ Available | ✅ | ✅ | ✅ |
-| **UseRadio** | Radio button group | ✅ Available | ✅ | ✅ | ✅ |
-| **UseTextarea** | Multi-line text input | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSwitch** | Toggle/Switch component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseFileUpload** | File upload dengan drag-drop | ✅ Available | ✅ | ✅ | ✅ |
-| **UseForm** | Form wrapper dengan validation | ✅ Available | ✅ | ✅ | ✅ |
-| **UseRating** | Rating star component | 🔄 Coming | - | - | - |
-| **UseSlider** | Range slider component | 🔄 Coming | - | - | - |
+| Komponen | Deskripsi | Vue 3 | React* | Angular* |
+|----------|-----------|-------|--------|----------|
+| **UseButton** | Button dengan multiple variants & sizes | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseInput** | Text input field dengan validation | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSelect** | Dropdown selection component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseCheckbox** | Checkbox control | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseRadio** | Radio button group | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseTextarea** | Multi-line text input | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSwitch** | Toggle/Switch component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseFileUpload** | File upload dengan drag-drop | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseForm** | Form wrapper dengan validation | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseRating** | Rating star component | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+| **UseSlider** | Range slider component | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+
+*React & Angular adapters coming Q2-Q3 2024
 
 ### ✅ Komponen Layout (Layout Components)
 
-| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
-|----------|-----------|--------|-------|-------|---------|
-| **UseContainer** | Container dengan max-width | ✅ Available | ✅ | ✅ | ✅ |
-| **UseGrid** | Grid layout system (12 columns) | ✅ Available | ✅ | ✅ | ✅ |
-| **UseStack** | Flexbox stack (horizontal/vertical) | ✅ Available | ✅ | ✅ | ✅ |
-| **UseCard** | Card component dengan slot support | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSpacer** | Spacing utility component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseFlex** | Flexbox wrapper component | ✅ Available | ✅ | ✅ | ✅ |
+| Komponen | Deskripsi | Vue 3 | React* | Angular* |
+|----------|-----------|-------|--------|----------|
+| **UseContainer** | Container dengan max-width | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseGrid** | Grid layout system (12 columns) | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseStack** | Flexbox stack (horizontal/vertical) | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseCard** | Card component dengan slot support | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSpacer** | Spacing utility component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseFlex** | Flexbox wrapper component | ✅ Available | 🔜 Soon | 🔜 Soon |
 | **UseAspectRatio** | Aspect ratio wrapper | 🔄 Coming | - | - | - |
 
 ### ✅ Komponen Navigation (Navigation Components)
 
-| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
-|----------|-----------|--------|-------|-------|---------|
-| **UseNavbar** | Top navigation bar | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSidebar** | Side navigation menu | ✅ Available | ✅ | ✅ | ✅ |
-| **UseBreadcrumb** | Breadcrumb navigation | ✅ Available | ✅ | ✅ | ✅ |
-| **UseMenu** | Dropdown menu component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseTabs** | Tab navigation component | ✅ Available | ✅ | ✅ | ✅ |
-| **UsePagination** | Pagination control | ✅ Available | ✅ | ✅ | ✅ |
-| **UseButton Group** | Grouped button toolbar | 🔄 Coming | - | - | - |
+| Komponen | Deskripsi | Vue 3 | React* | Angular* |
+|----------|-----------|-------|--------|----------|
+| **UseNavbar** | Top navigation bar | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSidebar** | Side navigation menu | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseBreadcrumb** | Breadcrumb navigation | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseMenu** | Dropdown menu component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseTabs** | Tab navigation component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UsePagination** | Pagination control | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseButton Group** | Grouped button toolbar | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+
+*React & Angular adapters coming Q2-Q3 2024
 
 ### ✅ Komponen Feedback (Feedback & Notification)
 
-| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
-|----------|-----------|--------|-------|-------|---------|
-| **UseAlert** | Alert/banner message | ✅ Available | ✅ | ✅ | ✅ |
-| **UseToast** | Toast notification system | ✅ Available | ✅ | ✅ | ✅ |
-| **UseModal** | Modal dialog component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseDrawer** | Side drawer/panel | ✅ Available | ✅ | ✅ | ✅ |
-| **UseTooltip** | Tooltip information | ✅ Available | ✅ | ✅ | ✅ |
-| **UsePopover** | Popover overlay | ✅ Available | ✅ | ✅ | ✅ |
-| **UseProgress** | Progress bar | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSkeleton** | Loading skeleton | ✅ Available | ✅ | ✅ | ✅ |
-| **UseSpinner** | Loading spinner | ✅ Available | ✅ | ✅ | ✅ |
-| **UseConfirm** | Confirmation dialog | 🔄 Coming | - | - | - |
+| Komponen | Deskripsi | Vue 3 | React* | Angular* |
+|----------|-----------|-------|--------|----------|
+| **UseAlert** | Alert/banner message | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseToast** | Toast notification system | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseModal** | Modal dialog component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseDrawer** | Side drawer/panel | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseTooltip** | Tooltip information | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UsePopover** | Popover overlay | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseProgress** | Progress bar | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSkeleton** | Loading skeleton | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseSpinner** | Loading spinner | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseConfirm** | Confirmation dialog | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+
+*React & Angular adapters coming Q2-Q3 2024
 
 ### ✅ Komponen Data Display (Data Display)
 
-| Komponen | Deskripsi | Status | Vue 3 | React | Angular |
-|----------|-----------|--------|-------|-------|---------|
-| **UseTable** | Data table dengan sorting/filtering | ✅ Available | ✅ | ✅ | ✅ |
-| **UseBadge** | Badge component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseTag** | Tag component dengan variants | ✅ Available | ✅ | ✅ | ✅ |
-| **UseAvatar** | Avatar component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseList** | List component | ✅ Available | ✅ | ✅ | ✅ |
-| **UseStatistic** | Statistic display | ✅ Available | ✅ | ✅ | ✅ |
-| **UseTimeline** | Timeline component | 🔄 Coming | - | - | - |
-| **UseTree** | Tree view component | 🔄 Coming | - | - | - |
+| Komponen | Deskripsi | Vue 3 | React* | Angular* |
+|----------|-----------|-------|--------|----------|
+| **UseTable** | Data table dengan sorting/filtering | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseBadge** | Badge component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseTag** | Tag component dengan variants | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseAvatar** | Avatar component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseList** | List component | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseStatistic** | Statistic display | ✅ Available | 🔜 Soon | 🔜 Soon |
+| **UseTimeline** | Timeline component | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+| **UseTree** | Tree view component | 🔄 Coming | 🔄 Coming | 🔄 Coming |
+
+*React & Angular adapters coming Q2-Q3 2024
 
 ### 🎨 Design System Features
 
@@ -540,9 +550,9 @@ Setelah instalasi berhasil:
 
 ## 🚀 Quick Start
 
-### 5 Menit Setup untuk Vue 3, React, dan Vanilla JS
+### Vue 3 - 5 Menit Setup
 
-Pilih framework yang Anda gunakan dan ikuti langkah-langkah di bawah:
+use-ui dioptimalkan untuk Vue 3. Ikuti langkah-langkah di bawah untuk memulai dengan cepat:
 
 ---
 
@@ -617,229 +627,25 @@ npm run dev
 
 ---
 
-### React Quick Start
+### 🔜 React Quick Start (Coming Soon)
 
-#### Step 1: Install Dependencies
-```bash
-npm install use-ui @use-ui/react react@^18 react-dom@^18
+React support is coming in the next release! 
+
+```
+React adapter will provide:
+✅ Full component library integration
+✅ Hooks-based API
+✅ TypeScript support
+✅ Example components and patterns
 ```
 
-#### Step 2: Setup App Component
-```jsx
-// src/App.jsx
-import { UseButton, UseCard, UseInput } from '@use-ui/react'
-import 'use-ui/dist/style.css'
-import { useState } from 'react'
-
-function App() {
-  const [username, setUsername] = useState('')
-
-  const handleClick = () => {
-    console.log('Button clicked!')
-    alert('Button was clicked!')
-  }
-
-  return (
-    <div className="p-4">
-      {/* Button Component */}
-      <UseButton 
-        type="primary" 
-        onClick={handleClick}
-        className="mb-4"
-      >
-        Click Me!
-      </UseButton>
-
-      {/* Card Component */}
-      <UseCard title="Welcome to use-ui">
-        <p>Ini adalah contoh card component</p>
-      </UseCard>
-
-      {/* Input Component */}
-      <UseInput 
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        label="Username"
-        placeholder="Masukkan username Anda"
-        className="mt-4"
-      />
-
-      {/* Display Value */}
-      {username && <p className="mt-2">Username: {username}</p>}
-    </div>
-  )
-}
-
-export default App
-```
-
-#### Step 3: Import in Main.jsx
-```jsx
-// src/main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
-```
-
-#### Step 4: Run Development Server
-```bash
-npm run dev
-```
-
-✅ React integration complete.
+Stay tuned for updates! 
 
 ---
 
-### Angular Quick Start
+### 🔜 Angular Quick Start (Coming Soon)
 
-#### Step 1: Install Dependencies
-```bash
-npm install use-ui @use-ui/angular
-```
-
-#### Step 2: Import Module
-```typescript
-// src/app/app.module.ts
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { UseUIModule } from '@use-ui/angular'
-
-import { AppComponent } from './app.component'
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    UseUIModule  // Import use-ui module
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-#### Step 3: Use Components
-```typescript
-// src/app/app.component.ts
-import { Component } from '@angular/core'
-
-@Component({
-  selector: 'app-root',
-  template: `
-    <div class="p-4">
-      <!-- Button Component -->
-      <use-button 
-        type="primary" 
-        (click)="handleClick()"
-        class="mb-4"
-      >
-        Click Me!
-      </use-button>
-
-      <!-- Card Component -->
-      <use-card title="Welcome to use-ui">
-        <p>Ini adalah contoh card component</p>
-      </use-card>
-
-      <!-- Input Component -->
-      <use-input 
-        [(ngModel)]="username"
-        label="Username"
-        placeholder="Masukkan username Anda"
-        class="mt-4"
-      ></use-input>
-
-      <!-- Display Value -->
-      <p class="mt-2" *ngIf="username">Username: {{ username }}</p>
-    </div>
-  `
-})
-export class AppComponent {
-  username: string = ''
-
-  handleClick() {
-    console.log('Button clicked!')
-    alert('Button was clicked!')
-  }
-}
-```
-
-#### Step 4: Add CSS Import
-```css
-/* src/styles.css */
-@import 'use-ui/dist/style.css';
-```
-
-#### Step 5: Run Development Server
-```bash
-ng serve
-```
-
-✅ Angular integration complete.
-
----
-
-### Vanilla JavaScript Quick Start
-
-#### Step 1: Include via CDN
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>use-ui Demo</title>
-  
-  <!-- Include use-ui CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/style.css">
-</head>
-<body>
-  <div id="app" class="p-4">
-    <!-- Components will be rendered here -->
-  </div>
-
-  <!-- Include use-ui JS -->
-  <script src="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/use-ui.umd.js"></script>
-  
-  <script>
-    const app = document.getElementById('app')
-
-    // Create Button
-    const button = document.createElement('use-button')
-    button.setAttribute('type', 'primary')
-    button.textContent = 'Click Me!'
-    button.className = 'mb-4'
-    button.addEventListener('click', () => {
-      alert('Button was clicked!')
-    })
-    app.appendChild(button)
-
-    // Create Card
-    const card = document.createElement('use-card')
-    card.setAttribute('title', 'Welcome to use-ui')
-    card.innerHTML = '<p>Ini adalah contoh card component</p>'
-    app.appendChild(card)
-
-    // Create Input
-    const input = document.createElement('use-input')
-    input.setAttribute('label', 'Username')
-    input.setAttribute('placeholder', 'Masukkan username Anda')
-    input.className = 'mt-4'
-    app.appendChild(input)
-  </script>
-</body>
-</html>
-```
-
-✅ Vanilla JS integration complete.
+Angular support is coming in the next release!
 
 ---
 
@@ -945,6 +751,501 @@ const showToast = () => {
     </UseCard>
   </UseGrid>
 </template>
+```
+
+---
+
+### Vue 3 Component Examples
+
+Contoh-contoh lengkap untuk menggunakan use-ui dengan Vue 3:
+
+#### 📋 Form Contoh Lengkap (Login Form)
+
+```vue
+<template>
+  <div class="login-container max-w-md mx-auto p-6">
+    <UseCard title="Login" class="shadow-lg">
+      <form @submit.prevent="handleLogin" class="space-y-4">
+        <!-- Email Input -->
+        <UseInput
+          v-model="form.email"
+          type="email"
+          label="Email Address"
+          placeholder="your@email.com"
+          :error="errors.email"
+          @blur="validateEmail"
+          required
+        />
+
+        <!-- Password Input -->
+        <UseInput
+          v-model="form.password"
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          :error="errors.password"
+          @blur="validatePassword"
+          required
+        />
+
+        <!-- Remember Me Checkbox -->
+        <UseCheckbox
+          v-model="form.rememberMe"
+          label="Remember me"
+        />
+
+        <!-- Submit Button -->
+        <UseButton
+          type="primary"
+          :loading="isLoading"
+          class="w-full"
+          @click="handleLogin"
+        >
+          {{ isLoading ? 'Logging in...' : 'Login' }}
+        </UseButton>
+
+        <!-- Error Alert -->
+        <UseAlert
+          v-if="submitError"
+          type="error"
+          :title="submitError"
+          closeable
+          @close="submitError = ''"
+        />
+
+        <!-- Success Alert -->
+        <UseAlert
+          v-if="loginSuccess"
+          type="success"
+          title="Login successful!"
+        />
+      </form>
+
+      <!-- Footer Link -->
+      <div class="text-center mt-4 text-sm">
+        <p>
+          Don't have an account?
+          <router-link to="/signup" class="text-blue-600 hover:underline">
+            Sign up here
+          </router-link>
+        </p>
+      </div>
+    </UseCard>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+// Form state
+const form = ref({
+  email: '',
+  password: '',
+  rememberMe: false
+})
+
+// Validation
+const errors = ref({
+  email: '',
+  password: ''
+})
+
+// UI state
+const isLoading = ref(false)
+const submitError = ref('')
+const loginSuccess = ref(false)
+
+// Validation functions
+const validateEmail = () => {
+  const email = form.value.email
+  if (!email) {
+    errors.value.email = 'Email is required'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.value.email = 'Invalid email format'
+  } else {
+    errors.value.email = ''
+  }
+}
+
+const validatePassword = () => {
+  const password = form.value.password
+  if (!password) {
+    errors.value.password = 'Password is required'
+  } else if (password.length < 6) {
+    errors.value.password = 'Password must be at least 6 characters'
+  } else {
+    errors.value.password = ''
+  }
+}
+
+// Form submission
+const handleLogin = async () => {
+  // Validate
+  validateEmail()
+  validatePassword()
+
+  if (errors.value.email || errors.value.password) {
+    return
+  }
+
+  // Simulate API call
+  isLoading.value = true
+  submitError.value = ''
+
+  try {
+    // Simulate delay
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    // Success
+    loginSuccess.value = true
+    setTimeout(() => {
+      router.push('/dashboard')
+    }, 2000)
+  } catch (error) {
+    submitError.value = 'Login failed. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
+}
+</script>
+
+<style scoped>
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+</style>
+```
+
+#### 🎨 Dashboard dengan Grid & Cards
+
+```vue
+<template>
+  <div class="dashboard p-6">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold">Dashboard</h1>
+      <p class="text-gray-600">Welcome back, {{ userName }}!</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <UseGrid :columns="{ sm: 1, md: 2, lg: 4 }" gap="lg" class="mb-8">
+      <UseCard v-for="stat in stats" :key="stat.id">
+        <div class="text-center">
+          <p class="text-gray-600 text-sm">{{ stat.label }}</p>
+          <p class="text-3xl font-bold text-blue-600">{{ stat.value }}</p>
+          <UseTag :variant="stat.trend > 0 ? 'success' : 'error'" class="mt-2">
+            {{ stat.trend > 0 ? '↑' : '↓' }} {{ Math.abs(stat.trend) }}%
+          </UseTag>
+        </div>
+      </UseCard>
+    </UseGrid>
+
+    <!-- Data Table -->
+    <UseCard title="Recent Transactions" class="mb-6">
+      <UseTable
+        :columns="tableColumns"
+        :data="tableData"
+        :loading="isTableLoading"
+        striped
+        hover
+      >
+        <template #status="{ row }">
+          <UseTag :variant="row.status === 'completed' ? 'success' : 'warning'">
+            {{ row.status }}
+          </UseTag>
+        </template>
+      </UseTable>
+    </UseCard>
+
+    <!-- Actions -->
+    <div class="flex gap-3">
+      <UseButton type="primary" @click="handleRefresh">
+        {{ isRefreshing ? 'Refreshing...' : 'Refresh Data' }}
+      </UseButton>
+      <UseButton type="secondary" @click="handleExport">
+        Export to CSV
+      </UseButton>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const userName = ref('John Doe')
+const isTableLoading = ref(false)
+const isRefreshing = ref(false)
+
+// Stats data
+const stats = ref([
+  { id: 1, label: 'Total Revenue', value: '$12,450', trend: 8.5 },
+  { id: 2, label: 'Active Users', value: '1,284', trend: 5.2 },
+  { id: 3, label: 'Conversion Rate', value: '3.24%', trend: -2.1 },
+  { id: 4, label: 'Avg. Order Value', value: '$562', trend: 12.3 }
+])
+
+// Table configuration
+const tableColumns = [
+  { key: 'date', label: 'Date', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true },
+  { key: 'customer', label: 'Customer', sortable: true },
+  { key: 'status', label: 'Status', sortable: false }
+]
+
+const tableData = ref([
+  { date: '2024-01-15', amount: '$1,250', customer: 'Alice Johnson', status: 'completed' },
+  { date: '2024-01-14', amount: '$890', customer: 'Bob Smith', status: 'pending' },
+  { date: '2024-01-13', amount: '$2,100', customer: 'Carol White', status: 'completed' },
+  { date: '2024-01-12', amount: '$450', customer: 'David Brown', status: 'completed' },
+  { date: '2024-01-11', amount: '$3,200', customer: 'Eve Davis', status: 'pending' }
+])
+
+// Handlers
+const handleRefresh = async () => {
+  isRefreshing.value = true
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    console.log('Data refreshed')
+  } finally {
+    isRefreshing.value = false
+  }
+}
+
+const handleExport = () => {
+  console.log('Exporting to CSV...')
+  // Implementation here
+}
+</script>
+
+<style scoped>
+.dashboard {
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+</style>
+```
+
+#### 🔄 Composable Usage Example
+
+```vue
+<template>
+  <div class="space-y-6 p-6">
+    <!-- Modal Example with useModal Composable -->
+    <div>
+      <UseButton @click="openModal">Open Modal</UseButton>
+
+      <UseModal
+        v-if="isModalOpen"
+        title="User Information"
+        @close="closeModal"
+      >
+        <div class="space-y-4">
+          <p>Modal ID: {{ modalData.id }}</p>
+          <p>Created at: {{ new Date(modalData.timestamp).toLocaleString() }}</p>
+          <UseButton type="primary" @click="closeModal">Close</UseButton>
+        </div>
+      </UseModal>
+    </div>
+
+    <!-- Toast Example with useToast Composable -->
+    <div class="flex gap-2 flex-wrap">
+      <UseButton @click="showSuccessToast" type="primary">Success</UseButton>
+      <UseButton @click="showErrorToast" type="error">Error</UseButton>
+      <UseButton @click="showInfoToast" type="secondary">Info</UseButton>
+      <UseButton @click="showWarningToast" type="warning">Warning</UseButton>
+    </div>
+
+    <!-- Theme Toggle Example -->
+    <div>
+      <label class="flex items-center gap-2">
+        <span>Dark Mode:</span>
+        <UseSwitch v-model="isDarkMode" />
+      </label>
+      <p class="text-sm text-gray-600 mt-2">Current theme: {{ isDarkMode ? 'Dark' : 'Light' }}</p>
+    </div>
+
+    <!-- Async Loading Example -->
+    <UseCard title="Async Data Loading">
+      <div v-if="isLoading" class="flex items-center gap-2">
+        <UseSpinner />
+        <span>Loading data...</span>
+      </div>
+      <div v-else>
+        <p>{{ asyncData }}</p>
+        <UseButton @click="loadData" class="mt-4">Reload</UseButton>
+      </div>
+    </UseCard>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useModal, useToast, useTheme } from 'use-ui'
+
+// useModal composable
+const { isOpen: isModalOpen, open: openModal, close: closeModal } = useModal()
+const modalData = ref({ id: 'M123', timestamp: Date.now() })
+
+// useToast composable
+const toast = useToast()
+
+const showSuccessToast = () => {
+  toast.success('Operation successful!', { duration: 3000 })
+}
+
+const showErrorToast = () => {
+  toast.error('An error occurred', { duration: 3000 })
+}
+
+const showInfoToast = () => {
+  toast.info('Here is some information', { duration: 3000 })
+}
+
+const showWarningToast = () => {
+  toast.warning('Please be careful', { duration: 3000 })
+}
+
+// useTheme composable
+const { isDarkMode } = useTheme()
+
+// Async loading
+const isLoading = ref(false)
+const asyncData = ref('Data loaded')
+
+const loadData = async () => {
+  isLoading.value = true
+  try {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    asyncData.value = 'Updated data: ' + new Date().toLocaleTimeString()
+  } finally {
+    isLoading.value = false
+  }
+}
+</script>
+
+<style scoped>
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+</style>
+```
+
+#### 🎯 Advanced Form dengan Dynamic Fields
+
+```vue
+<template>
+  <UseCard title="Dynamic Form" class="max-w-2xl">
+    <form @submit.prevent="handleSubmit" class="space-y-4">
+      <!-- Static Fields -->
+      <UseInput
+        v-model="form.name"
+        label="Full Name"
+        placeholder="Enter your name"
+        required
+      />
+
+      <!-- Dynamic Fields -->
+      <div v-for="(field, index) in dynamicFields" :key="field.id" class="space-y-2">
+        <div class="flex gap-2">
+          <div class="flex-1">
+            <UseInput
+              v-model="field.value"
+              :label="`Skill ${index + 1}`"
+              placeholder="Enter skill"
+            />
+          </div>
+          <UseButton
+            type="error"
+            variant="outline"
+            @click="removeField(field.id)"
+            class="self-end"
+          >
+            Remove
+          </UseButton>
+        </div>
+      </div>
+
+      <!-- Add Field Button -->
+      <UseButton
+        type="secondary"
+        @click="addField"
+        variant="outline"
+        class="mt-4"
+      >
+        + Add Skill
+      </UseButton>
+
+      <!-- Form Actions -->
+      <div class="flex gap-2 justify-end mt-6">
+        <UseButton type="secondary" @click="resetForm">Reset</UseButton>
+        <UseButton type="primary" @click="handleSubmit">Submit</UseButton>
+      </div>
+    </form>
+  </UseCard>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const form = ref({
+  name: ''
+})
+
+const dynamicFields = ref([
+  { id: 1, value: '' },
+  { id: 2, value: '' }
+])
+
+let nextId = 3
+
+const addField = () => {
+  dynamicFields.value.push({
+    id: nextId++,
+    value: ''
+  })
+}
+
+const removeField = (id) => {
+  dynamicFields.value = dynamicFields.value.filter(f => f.id !== id)
+}
+
+const handleSubmit = () => {
+  const submitData = {
+    name: form.value.name,
+    skills: dynamicFields.value.map(f => f.value).filter(v => v)
+  }
+  console.log('Form submitted:', submitData)
+}
+
+const resetForm = () => {
+  form.value.name = ''
+  dynamicFields.value = [
+    { id: 1, value: '' },
+    { id: 2, value: '' }
+  ]
+  nextId = 3
+}
+</script>
+
+<style scoped>
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+</style>
 ```
 
 ---
@@ -1771,17 +2072,29 @@ UseDataTable
 
 ### 📦 Framework-Specific Code
 
-#### Vue 3 Specifics
+#### ✅ Vue 3 (Currently Active)
 
 ```
 src/vue3/
-├── components/          # Vue SFC files
-├── composables/         # Vue 3 Composition API
-├── directives/          # Vue 3 Custom Directives
-└── plugins/             # Vue 3 Plugins
+├── components/          # Vue SFC files (.vue)
+├── composables/         # Vue 3 Composition API hooks
+├── directives/          # Vue 3 Custom Directives (v-*)
+├── plugins/             # Vue 3 Plugins
+├── types/               # TypeScript type definitions
+└── styles/              # Vue-specific styling
 ```
 
-#### React Specifics
+**Current Features:**
+- ✅ Full component library (38+ components)
+- ✅ Composition API support
+- ✅ TypeScript support
+- ✅ SFC (Single File Components)
+- ✅ Reactive state management
+- ✅ Custom hooks (composables)
+
+---
+
+#### 🔜 React Specifics (Coming Soon)
 
 ```
 src/react/
@@ -1791,7 +2104,16 @@ src/react/
 └── hoc/                 # Higher-Order Components
 ```
 
-#### Angular Specifics
+**Planned Features:**
+- Functional components with React 18+
+- Custom hooks for state management
+- Context API integration
+- TypeScript support
+- React Server Components support (experimental)
+
+---
+
+#### 🔜 Angular Specifics (Coming Soon)
 
 ```
 src/angular/
@@ -1801,11 +2123,20 @@ src/angular/
 └── modules/             # Angular Feature Modules
 ```
 
-#### Vanilla JS Specifics
+**Planned Features:**
+- Component-based architecture
+- RxJS observables
+- Dependency injection
+- Template-driven forms
+- Reactive forms support
+
+---
+
+#### 🔜 Vanilla JS Specifics (Coming Soon)
 
 ```
 src/vanilla/
-├── components/          # Web Components
+├── components/          # Web Components (Custom Elements)
 ├── utils/               # Helper functions
 ├── registry/            # Component registry
 └── types/               # TypeScript definitions
@@ -1994,49 +2325,50 @@ export function useTheme() {
 
 ### 🎯 Cross-Framework Strategy
 
-**use-ui** didukung oleh filosofi framework-agnostic yang memungkinkan developer menggunakan component library yang sama di berbagai environment modern:
+**use-ui** memulai dengan fokus pada **Vue 3** untuk memberikan pengalaman terbaik. Dukungan untuk framework lain sedang dalam pengembangan:
 
-| Aspek | Deskripsi |
-|-------|-----------|
-| **Foundation** | Web Components (Custom Elements API) + HTML + CSS |
-| **Wrapper Layers** | Framework-specific adapters untuk Vue 3, React, Angular |
-| **API Consistency** | Unified naming dan behavior across frameworks |
-| **Styling** | CSS Variables untuk universal theming |
-| **Performance** | Optimized untuk setiap framework runtime |
+| Framework | Status | Availability | Preview |
+|-----------|--------|--------------|---------|
+| **Vue 3** | ✅ Production | Available now | [Start using](#-quick-start) |
+| **React** | 🔄 In Development | Coming Q2 2024 | [Coming Soon](#-react-coming-soon) |
+| **Angular** | 📋 Planned | Coming Q3 2024 | [Coming Soon](#-angular-coming-soon) |
+| **Vanilla JS** | 📋 Planned | Coming Q2 2024 | [Coming Soon](#-vanilla-javascript-coming-soon) |
 
 ---
 
-### 🏗️ Architecture Overview
+### 🏗️ Architecture Overview (Vue 3 Focused)
 
 ```
 ┌─────────────────────────────────────────────┐
-│       Application Layer                      │
-│  (Vue 3 / React / Angular / Vanilla JS)     │
+│  Vue 3 Application Layer (Current Focus)    │
 └──────────────┬──────────────────────────────┘
                │
-      ┌────────┼────────┐
-      │        │        │
-   ┌──▼──┐ ┌──▼──┐ ┌───▼──┐
-   │ Vue │ │React│ │Angular│
-   └──┬──┘ └──┬──┘ └───┬──┘
-      │   (Framework-Specific Adapters)
-      │        │        │
-      └────────┼────────┘
-               │
     ┌──────────▼──────────┐
-    │ Web Components API  │
-    │  (Custom Elements)  │
+    │ use-ui Vue 3 Plugin │
+    │ + Composables       │
     └──────────┬──────────┘
                │
     ┌──────────▼──────────┐
-    │  HTML + CSS         │
-    │  + CSS Variables    │
+    │  Vue 3 Components   │
+    │  (38+ Components)   │
+    └──────────┬──────────┘
+               │
+    ┌──────────▼──────────┐
+    │  HTML + CSS + Vue   │
+    │  Reactive System    │
     └─────────────────────┘
+```
+
+**Future Adapters (Coming Soon):**
+```
+React Adapter Layer → React Components → HTML + CSS
+Angular Adapter Layer → Angular Components → HTML + CSS
+Web Components Layer → Vanilla JS → HTML + CSS + Web Components API
 ```
 
 ---
 
-### 🔄 How It Works
+### 🔄 Current Implementation (Vue 3)
 
 #### Layer 1: Foundation (Web Components)
 
@@ -2253,179 +2585,80 @@ form {
 </style>
 ```
 
-#### React - Hooks Pattern
+#### 🔜 React - Hooks Pattern (Coming Soon)
 
-```jsx
-import { useState } from 'react'
+React implementation with hooks-based API is currently in development:
+
+```javascript
+// Coming Soon - React 18+ with hooks support
 import { UseInput, UseButton } from '@use-ui/react'
-import { useForm } from '@use-ui/react/hooks'
-import '@use-ui/react/dist/style.css'
 
 export function LoginForm() {
   const { values, errors, handleChange, handleSubmit } = useForm({
-    initialValues: {
-      email: '',
-      password: ''
-    },
-    onSubmit: async (values) => {
-      console.log('Submitting:', values)
-    }
+    // Form configuration
   })
-
-  const [isLoading, setIsLoading] = useState(false)
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    await handleSubmit()
-    setIsLoading(false)
-  }
-
-  return (
-    <form onSubmit={onSubmit} style={styles.form}>
-      <UseInput
-        name="email"
-        type="email"
-        label="Email"
-        value={values.email}
-        onChange={handleChange}
-        error={errors.email}
-      />
-      <UseInput
-        name="password"
-        type="password"
-        label="Password"
-        value={values.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
-      <UseButton
-        type="primary"
-        disabled={isLoading}
-        loading={isLoading}
-      >
-        Sign In
-      </UseButton>
-    </form>
-  )
-}
-
-const styles = {
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 'var(--spacing-md)',
-    maxWidth: '400px'
-  }
+  // Implementation coming Q2 2024
 }
 ```
 
-#### Angular - Typed Components Pattern
+**Planned Features:**
+- React 18+ hooks support
+- Functional components
+- TypeScript support
+- Context API integration
+- Server Components (experimental)
+
+---
+
+#### 🔜 Angular - Typed Components Pattern (Coming Soon)
+
+Angular implementation with full framework integration is currently in development:
 
 ```typescript
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { UseUIModule } from '@use-ui/angular'
-
+// Coming Soon - Angular 15+ with dependency injection
 @Component({
   selector: 'app-login-form',
   template: `
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <use-input
-        label="Email"
-        type="email"
-        formControlName="email"
-        [error]="getErrorMessage('email')"
-      ></use-input>
-      
-      <use-input
-        label="Password"
-        type="password"
-        formControlName="password"
-        [error]="getErrorMessage('password')"
-      ></use-input>
-      
-      <use-button
-        type="primary"
-        [disabled]="isSubmitting"
-        [loading]="isSubmitting"
-      >
-        Sign In
-      </use-button>
-    </form>
-  `,
-  styles: [`
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-md);
-      max-width: 400px;
-    }
-  `],
-  standalone: true,
-  imports: [UseUIModule]
+    <!-- Angular template support coming -->
+  `
 })
-export class LoginFormComponent implements OnInit {
-  loginForm: FormGroup
-  isSubmitting = false
-
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    })
-  }
-
-  ngOnInit() {}
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.isSubmitting = true
-      // Submit logic
-    }
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const field = this.loginForm.get(fieldName)
-    if (field?.hasError('required')) {
-      return `${fieldName} is required`
-    }
-    if (fieldName === 'email' && field?.hasError('email')) {
-      return 'Invalid email'
-    }
-    return ''
-  }
+export class LoginFormComponent {
+  // Implementation coming Q3 2024
 }
 ```
 
-#### Vanilla JavaScript - Web Components Direct
+**Planned Features:**
+- Angular 15+ compatibility
+- Reactive Forms support
+- Dependency injection
+- RxJS observables
+- Full TypeScript support
+
+---
+
+#### 🔜 Vanilla JavaScript - Web Components Direct (Coming Soon)
+
+Web Components implementation is currently in development:
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui/dist/style.css">
-</head>
-<body>
-  <form id="login-form">
-    <use-input
-      id="email-input"
-      type="email"
-      label="Email"
-      placeholder="your@email.com"
-    ></use-input>
+<!-- Coming Soon - Pure Web Components -->
+<use-input
+  id="email-input"
+  type="email"
+  label="Email"
+></use-input>
 
-    <use-input
-      id="password-input"
-      type="password"
-      label="Password"
-      placeholder="Enter password"
-    ></use-input>
+<!-- Full CDN support and micro-frontend capabilities coming Q2 2024 -->
+```
 
-    <use-button id="submit-btn" type="primary">
-      Sign In
-    </use-button>
-  </form>
+**Planned Features:**
+- Pure Web Components (Custom Elements API)
+- CDN distribution
+- Micro-frontend support
+- Framework-agnostic
+- Zero dependencies
+
+---
 
   <script src="https://cdn.jsdelivr.net/npm/use-ui/dist/use-ui.js"></script>
   <script>
@@ -2697,41 +2930,86 @@ All: Tree-shakeable → ~15KB with single component
 
 ---
 
-### 🚀 When to Use Each Framework
+### 🚀 Framework Support Status
 
-#### Use Vue 3 when:
+#### ✅ Vue 3 (Currently Supported)
+
+**Use Vue 3 when:**
 - ✅ You need reactive, two-way binding
 - ✅ You prefer template syntax
 - ✅ You want smallest bundle with features
 - ✅ Building interactive dashboards
+- ✅ **use-ui has full support for Vue 3 with 38+ components**
 
-#### Use React when:
-- ✅ You have large ecosystem requirements
-- ✅ You prefer functional programming
-- ✅ You need maximum community support
-- ✅ Building complex state management
-
-#### Use Angular when:
-- ✅ You need full-featured framework
-- ✅ You have TypeScript-first requirements
-- ✅ You need dependency injection
-- ✅ Building enterprise applications
-
-#### Use Vanilla JS when:
-- ✅ You don't need framework overhead
-- ✅ You have simple component needs
-- ✅ You need framework-agnostic solution
-- ✅ Building micro-frontends
+**Current Status:** 
+- 🎯 Production Ready
+- ✅ Full component library available
+- ✅ Complete documentation and examples
+- ✅ Active development and maintenance
 
 ---
 
-### 📚 Framework Documentation Links
+#### 🔜 React (Coming Soon)
 
-- [Vue 3 Guide](./docs/frameworks/vue3.md)
-- [React Guide](./docs/frameworks/react.md)
-- [Angular Guide](./docs/frameworks/angular.md)
-- [Vanilla JS Guide](./docs/frameworks/vanilla.md)
-- [Migration Guide](./docs/frameworks/migration.md)
+**Planned for React:**
+- React 18+ support with hooks
+- Functional component adapters
+- TypeScript support
+- Full component library
+- Server Components support (experimental)
+
+**Status:** 🔄 In Development
+
+```
+Expected Release: Q2 2024
+(React adapter development in progress)
+```
+
+---
+
+#### 🔜 Angular (Coming Soon)
+
+**Planned for Angular:**
+- Angular 15+ support
+- Full-featured framework integration
+- Dependency injection support
+- Reactive forms support
+- Template directives
+
+**Status:** 🔄 Roadmap
+
+```
+Expected Release: Q3 2024
+(Angular adapter design phase)
+```
+
+---
+
+#### 🔜 Vanilla JavaScript (Coming Soon)
+
+**Planned for Vanilla JS:**
+- Pure Web Components
+- No framework dependencies
+- CDN distribution
+- Micro-frontend support
+- Native Custom Elements API
+
+**Status:** 🔄 Roadmap
+
+```
+Expected Release: Q2 2024
+(Web Components implementation in progress)
+```
+
+---
+
+### 📚 Documentation
+
+- ✅ [Vue 3 Full Guide](./docs/frameworks/vue3.md) - Complete with examples
+- 📋 [React Guide](#coming-soon) - Coming Soon
+- 📋 [Angular Guide](#coming-soon) - Coming Soon
+- 📋 [Vanilla JS Guide](#coming-soon) - Coming Soon
+- 📋 [Migration Guide](#coming-soon) - Coming Soon
 
 ---
 
