@@ -14,6 +14,10 @@
 - [Instalasi](#instalasi)
 - [Quick Start](#quick-start)
 - [Design System](#design-system)
+  - [Design Principles](#-design-system-principles)
+  - [Color System](#palet-warna)
+  - [Typography](#typography)
+  - [Spacing](#spacing)
 - [Struktur Komponen](#struktur-komponen)
 - [Dokumentasi API](#dokumentasi-api)
 - [Dukungan Lintas Framework](#dukungan-lintas-framework)
@@ -471,10 +475,22 @@ Setelah instalasi berhasil:
 
 ## 🚀 Quick Start
 
-### Vue 3 Setup
+### 5 Menit Setup untuk Vue 3, React, dan Vanilla JS
 
+Pilih framework yang Anda gunakan dan ikuti langkah-langkah di bawah:
+
+---
+
+### Vue 3 Quick Start
+
+#### Step 1: Install Dependencies
+```bash
+npm install use-ui
+```
+
+#### Step 2: Setup Main.js
 ```javascript
-// main.js
+// src/main.js
 import { createApp } from 'vue'
 import useUI from 'use-ui'
 import 'use-ui/dist/style.css'
@@ -482,28 +498,36 @@ import App from './App.vue'
 
 const app = createApp(App)
 
+// Register use-ui plugin
 app.use(useUI)
+
 app.mount('#app')
 ```
 
-### Menggunakan Komponen
-
+#### Step 3: Use Components in Templates
 ```vue
 <template>
-  <div class="container">
-    <UseButton type="primary" @click="handleClick">
+  <div class="p-4">
+    <!-- Button Component -->
+    <UseButton type="primary" @click="handleClick" class="mb-4">
       Click Me!
     </UseButton>
-    
-    <UseCard title="Welcome">
-      <p>Ini adalah contoh menggunakan use-ui components</p>
+
+    <!-- Card Component -->
+    <UseCard title="Welcome to use-ui">
+      <p>Ini adalah contoh card component</p>
     </UseCard>
-    
+
+    <!-- Input Component -->
     <UseInput 
       v-model="username" 
-      placeholder="Masukkan username"
       label="Username"
+      placeholder="Masukkan username Anda"
+      class="mt-4"
     />
+
+    <!-- Display Value -->
+    <p class="mt-2" v-if="username">Username: {{ username }}</p>
   </div>
 </template>
 
@@ -514,13 +538,709 @@ const username = ref('')
 
 const handleClick = () => {
   console.log('Button clicked!')
+  alert('Button was clicked!')
 }
 </script>
 ```
 
+#### Step 4: Run Development Server
+```bash
+npm run dev
+```
+
+✅ You're done! Vue 3 integration complete.
+
+---
+
+### React Quick Start
+
+#### Step 1: Install Dependencies
+```bash
+npm install use-ui @use-ui/react react@^18 react-dom@^18
+```
+
+#### Step 2: Setup App Component
+```jsx
+// src/App.jsx
+import { UseButton, UseCard, UseInput } from '@use-ui/react'
+import 'use-ui/dist/style.css'
+import { useState } from 'react'
+
+function App() {
+  const [username, setUsername] = useState('')
+
+  const handleClick = () => {
+    console.log('Button clicked!')
+    alert('Button was clicked!')
+  }
+
+  return (
+    <div className="p-4">
+      {/* Button Component */}
+      <UseButton 
+        type="primary" 
+        onClick={handleClick}
+        className="mb-4"
+      >
+        Click Me!
+      </UseButton>
+
+      {/* Card Component */}
+      <UseCard title="Welcome to use-ui">
+        <p>Ini adalah contoh card component</p>
+      </UseCard>
+
+      {/* Input Component */}
+      <UseInput 
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        label="Username"
+        placeholder="Masukkan username Anda"
+        className="mt-4"
+      />
+
+      {/* Display Value */}
+      {username && <p className="mt-2">Username: {username}</p>}
+    </div>
+  )
+}
+
+export default App
+```
+
+#### Step 3: Import in Main.jsx
+```jsx
+// src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+```
+
+#### Step 4: Run Development Server
+```bash
+npm run dev
+```
+
+✅ React integration complete.
+
+---
+
+### Angular Quick Start
+
+#### Step 1: Install Dependencies
+```bash
+npm install use-ui @use-ui/angular
+```
+
+#### Step 2: Import Module
+```typescript
+// src/app/app.module.ts
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { UseUIModule } from '@use-ui/angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    UseUIModule  // Import use-ui module
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+#### Step 3: Use Components
+```typescript
+// src/app/app.component.ts
+import { Component } from '@angular/core'
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <div class="p-4">
+      <!-- Button Component -->
+      <use-button 
+        type="primary" 
+        (click)="handleClick()"
+        class="mb-4"
+      >
+        Click Me!
+      </use-button>
+
+      <!-- Card Component -->
+      <use-card title="Welcome to use-ui">
+        <p>Ini adalah contoh card component</p>
+      </use-card>
+
+      <!-- Input Component -->
+      <use-input 
+        [(ngModel)]="username"
+        label="Username"
+        placeholder="Masukkan username Anda"
+        class="mt-4"
+      ></use-input>
+
+      <!-- Display Value -->
+      <p class="mt-2" *ngIf="username">Username: {{ username }}</p>
+    </div>
+  `
+})
+export class AppComponent {
+  username: string = ''
+
+  handleClick() {
+    console.log('Button clicked!')
+    alert('Button was clicked!')
+  }
+}
+```
+
+#### Step 4: Add CSS Import
+```css
+/* src/styles.css */
+@import 'use-ui/dist/style.css';
+```
+
+#### Step 5: Run Development Server
+```bash
+ng serve
+```
+
+✅ Angular integration complete.
+
+---
+
+### Vanilla JavaScript Quick Start
+
+#### Step 1: Include via CDN
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>use-ui Demo</title>
+  
+  <!-- Include use-ui CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/style.css">
+</head>
+<body>
+  <div id="app" class="p-4">
+    <!-- Components will be rendered here -->
+  </div>
+
+  <!-- Include use-ui JS -->
+  <script src="https://cdn.jsdelivr.net/npm/use-ui@latest/dist/use-ui.umd.js"></script>
+  
+  <script>
+    const app = document.getElementById('app')
+
+    // Create Button
+    const button = document.createElement('use-button')
+    button.setAttribute('type', 'primary')
+    button.textContent = 'Click Me!'
+    button.className = 'mb-4'
+    button.addEventListener('click', () => {
+      alert('Button was clicked!')
+    })
+    app.appendChild(button)
+
+    // Create Card
+    const card = document.createElement('use-card')
+    card.setAttribute('title', 'Welcome to use-ui')
+    card.innerHTML = '<p>Ini adalah contoh card component</p>'
+    app.appendChild(card)
+
+    // Create Input
+    const input = document.createElement('use-input')
+    input.setAttribute('label', 'Username')
+    input.setAttribute('placeholder', 'Masukkan username Anda')
+    input.className = 'mt-4'
+    app.appendChild(input)
+  </script>
+</body>
+</html>
+```
+
+✅ Vanilla JS integration complete.
+
+---
+
+### Common Use Cases
+
+#### 1️⃣ Form with Validation
+```vue
+<!-- Vue 3 Example -->
+<template>
+  <UseForm @submit="handleSubmit">
+    <UseInput 
+      v-model="form.email"
+      type="email"
+      label="Email"
+      required
+    />
+    <UseInput 
+      v-model="form.password"
+      type="password"
+      label="Password"
+      required
+      class="mt-3"
+    />
+    <UseButton type="primary" class="mt-4">Submit</UseButton>
+  </UseForm>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const form = ref({
+  email: '',
+  password: ''
+})
+
+const handleSubmit = (e) => {
+  console.log('Form submitted:', form.value)
+}
+</script>
+```
+
+#### 2️⃣ Modal Dialog
+```vue
+<!-- Vue 3 Example -->
+<template>
+  <div>
+    <UseButton @click="showModal = true">Open Modal</UseButton>
+
+    <UseModal 
+      v-if="showModal"
+      title="Confirm Action"
+      @close="showModal = false"
+    >
+      <p>Are you sure you want to proceed?</p>
+      <div class="flex gap-2 mt-4">
+        <UseButton type="secondary" @click="showModal = false">Cancel</UseButton>
+        <UseButton type="primary" @click="handleConfirm">Confirm</UseButton>
+      </div>
+    </UseModal>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const showModal = ref(false)
+
+const handleConfirm = () => {
+  console.log('Confirmed!')
+  showModal.value = false
+}
+</script>
+```
+
+#### 3️⃣ Toast Notification
+```vue
+<!-- Vue 3 Example -->
+<template>
+  <UseButton @click="showToast">Show Notification</UseButton>
+</template>
+
+<script setup>
+import { useToast } from 'use-ui'
+
+const toast = useToast()
+
+const showToast = () => {
+  toast.success('Action completed successfully!', {
+    duration: 3000,
+    position: 'top-right'
+  })
+}
+</script>
+```
+
+#### 4️⃣ Responsive Grid
+```vue
+<!-- Vue 3 Example -->
+<template>
+  <UseGrid :columns="{ sm: 1, md: 2, lg: 3 }" gap="md">
+    <UseCard v-for="i in 6" :key="i" :title="`Card ${i}`">
+      <p>This is card {{ i }}</p>
+    </UseCard>
+  </UseGrid>
+</template>
+```
+
+---
+
+### Tips & Best Practices
+
+🎯 **Tip 1: Tree-Shaking**
+```javascript
+// ✅ Good - Only import what you need
+import { UseButton, UseInput } from 'use-ui'
+
+// ❌ Avoid - Imports everything
+import * as UI from 'use-ui'
+```
+
+🎯 **Tip 2: Styling**
+```vue
+<!-- Use CSS classes for styling -->
+<UseButton class="custom-button">Button</UseButton>
+
+<!-- Or pass style object -->
+<UseButton :style="{ padding: '12px', fontSize: '16px' }">Button</UseButton>
+```
+
+🎯 **Tip 3: Theming**
+```javascript
+// Customize theme
+import { createTheme } from 'use-ui'
+
+const theme = createTheme({
+  colors: {
+    primary: '#FF6B6B',
+    secondary: '#4ECDC4'
+  }
+})
+```
+
+🎯 **Tip 4: Accessibility**
+```vue
+<!-- Always provide labels for inputs -->
+<UseInput 
+  label="Your Name"
+  aria-label="Full name input"
+  aria-required="true"
+  required
+/>
+```
+
+---
+
+### Next Steps
+
+1. 📖 **Read the Documentation** - Full API docs in [Dokumentasi API](#dokumentasi-api)
+2. 🎨 **Explore Storybook** - Interactive component playground: `npm run storybook`
+3. 📚 **Check Examples** - More examples in [Examples](#-dukungan-lintas-framework)
+4. 🤝 **Join Community** - Discuss on GitHub Issues
+5. 🚀 **Build Your App** - Start building amazing UIs!
+
+### Troubleshooting Quick Start
+
+| Problem | Solution |
+|---------|----------|
+| Components not rendering | Check if CSS is imported: `import 'use-ui/dist/style.css'` |
+| Type errors (React) | Ensure TypeScript types are installed: `npm install @use-ui/react` |
+| Styling not applied | Verify CSS file path and no CSS loader conflicts |
+| Vue warning about components | Register as global or use `import { UseButton } from 'use-ui'` |
+
 ---
 
 ## 🎨 Design System
+
+### 📋 Design System Principles
+
+use-ui design system dibangun atas 7 prinsip fundamental yang memandu setiap keputusan desain dan implementasi:
+
+#### 1️⃣ **Consistency (Konsistensi)**
+Semua komponen mengikuti pattern yang sama, memastikan pengalaman yang predictable dan familiar bagi pengguna.
+
+**Implementasi:**
+- Ukuran dan spacing yang standardized
+- Naming conventions yang konsisten
+- Behavior patterns yang uniform
+- Visual language yang coherent
+
+**Benefit:**
+- ✅ Faster learning curve untuk user
+- ✅ Reduced cognitive load
+- ✅ Predictable component behavior
+- ✅ Easier maintenance untuk developer
+
+---
+
+#### 2️⃣ **Accessibility (Aksesibilitas)**
+Semua komponen dirancang dengan accessibility sebagai prioritas utama, bukan afterthought.
+
+**Implementasi:**
+- WCAG 2.1 Level AA compliance dari awal
+- Semantic HTML structure
+- ARIA labels dan roles
+- Keyboard navigation support
+- Color contrast ratios > 4.5:1
+- Screen reader friendly
+
+**Benefit:**
+- ✅ Inclusive untuk semua user
+- ✅ Legal compliance
+- ✅ Better SEO
+- ✅ Better user experience untuk semua
+
+---
+
+#### 3️⃣ **Simplicity (Kesederhanaan)**
+Keep it simple. Setiap komponen hanya melakukan satu hal dengan baik.
+
+**Implementasi:**
+- Minimal API surface
+- Clear prop names
+- Intuitive default behavior
+- Avoid over-engineering
+- Progressive enhancement
+
+**Benefit:**
+- ✅ Easy to learn dan use
+- ✅ Low barrier to entry
+- ✅ Composable components
+- ✅ Flexible combinations
+
+---
+
+#### 4️⃣ **Flexibility (Fleksibilitas)**
+Komponen fleksibel cukup untuk berbagai use case namun tetap opinionated untuk maintainability.
+
+**Implementasi:**
+- CSS Variables untuk theming
+- Slot-based composition
+- Customizable through props
+- Framework-agnostic approach
+- Support untuk advanced use cases
+
+**Benefit:**
+- ✅ Adaptable ke berbagai design
+- ✅ Works across frameworks
+- ✅ Reusable di berbagai context
+- ✅ Future-proof design
+
+---
+
+#### 5️⃣ **Performance (Performa)**
+Lightweight dan fast, tanpa compromising functionality.
+
+**Implementasi:**
+- Minimal CSS (tree-shakeable)
+- No heavy dependencies
+- Optimized bundle size (~25KB gzip)
+- Fast rendering
+- Lazy-loadable components
+
+**Benefit:**
+- ✅ Faster page load times
+- ✅ Better user experience
+- ✅ Reduced bandwidth usage
+- ✅ Works on slow networks
+
+---
+
+#### 6️⃣ **Developer Experience (DX)**
+Make it delightful untuk developer. Clear docs, good errors, helpful utilities.
+
+**Implementasi:**
+- Comprehensive TypeScript support
+- Clear error messages
+- Helpful warning dalam development
+- Rich documentation
+- Interactive Storybook
+- Good IDE autocomplete
+
+**Benefit:**
+- ✅ Faster development
+- ✅ Fewer bugs
+- ✅ Easier debugging
+- ✅ More enjoyable workflow
+
+---
+
+#### 7️⃣ **Quality (Kualitas)**
+Thorough testing, maintained standards, production-ready code.
+
+**Implementasi:**
+- 100% test coverage
+- Continuous integration
+- Regular updates & maintenance
+- Semantic versioning
+- Changelog documentation
+- Performance benchmarks
+
+**Benefit:**
+- ✅ Reliable components
+- ✅ Security patches
+- ✅ Long-term support
+- ✅ Enterprise-grade quality
+
+---
+
+### Design System Values vs Principles
+
+| Nilai | Prinsip | Aksi |
+|-------|---------|------|
+| **User-First** | Accessibility + Simplicity | Design with users in mind |
+| **Developer-First** | Developer Experience + Simplicity | Make tools that developers love |
+| **Quality-Focused** | Quality + Performance | Maintain high standards |
+| **Future-Proof** | Flexibility + Quality | Built to last |
+| **Community-Driven** | Consistency + Quality | Work with the community |
+
+---
+
+### Visual Identity Hierarchy
+
+```
+Foundation (Base)
+  ↓
+Design Tokens (Color, Typography, Spacing)
+  ↓
+Components (Button, Input, Card, etc)
+  ↓
+Patterns (Forms, Layouts, Navigation)
+  ↓
+Applications (Complete UIs)
+```
+
+**Setiap level builds upon the previous, maintaining consistency throughout.**
+
+---
+
+### Color Philosophy
+
+**Primary Purpose:** 
+- Menggunakan warna untuk **hierarchy** dan **meaning**, bukan decoration
+
+**Color System:**
+- **Primary:** Main action/interactive elements
+- **Secondary:** Alternative/secondary actions
+- **Semantic:** Status indication (success, warning, error, info)
+- **Neutral:** Backgrounds, borders, text
+
+**Accessibility:**
+- All colors pass WCAG AA contrast requirements
+- Never rely on color alone untuk convey information
+- Support untuk color-blind users
+
+---
+
+### Typography Philosophy
+
+**Font Stack:**
+Gunakan system fonts untuk fast loading dan native feel:
+```
+-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif
+```
+
+**Font Sizes:**
+- Base: 16px (1rem) untuk optimal readability
+- Scale menggunakan modular scale (1.125 ratio)
+- Consistent hierarchy di semua breakpoints
+
+**Font Weights:**
+- **Light (300):** Subtle, de-emphasized text
+- **Normal (400):** Body text, default
+- **Semibold (600):** Emphasis, labels
+- **Bold (700):** Strong emphasis, headings
+
+---
+
+### Spacing Philosophy
+
+**Base Unit:** 8px (0.5rem)
+Semua spacing menggunakan multiples dari 8px:
+
+```
+4px (xs)   = 0.5 base unit
+8px (sm)   = 1 base unit  ← minimum for interactive elements
+16px (md)  = 2 base units
+24px (lg)  = 3 base units
+32px (xl)  = 4 base units
+48px (2xl) = 6 base units
+```
+
+**Benefits:**
+- ✅ Predictable rhythm
+- ✅ Responsive & scalable
+- ✅ Easy to implement
+- ✅ Consistent spacing
+
+---
+
+### Responsive Design Philosophy
+
+**Mobile-First Approach:**
+1. Design untuk mobile (smallest screen)
+2. Enhance untuk larger screens
+3. Progressive enhancement
+
+**Breakpoints:**
+```
+sm: 640px   (Small phones)
+md: 768px   (Tablets)
+lg: 1024px  (Laptops)
+xl: 1280px  (Desktops)
+2xl: 1536px (Large desktops)
+```
+
+---
+
+### Interaction Design Philosophy
+
+**Principles:**
+- **Feedback:** User actions mendapat immediate visual feedback
+- **Forgiveness:** Easy to undo mistakes
+- **Clarity:** Action consequences jelas sebelum execution
+- **Consistency:** Same action sama result everywhere
+- **Efficiency:** Power users dapat bekerja lebih cepat
+
+**Implementation:**
+- Hover states untuk interactive elements
+- Loading states untuk async operations
+- Error messages yang helpful
+- Keyboard navigation support
+- Touch-friendly touch targets (min 44px)
+
+---
+
+### Component Design Guidelines
+
+#### Naming Convention
+```
+Use<ComponentName>
+UseButton       ✅
+UseInputField   ✅
+UseBtnPrimary   ❌
+UseBtn          ❌
+```
+
+#### Prop Naming
+```
+// Use semantic, descriptive names
+<UseButton type="primary" size="lg" disabled={false} />
+
+// Avoid abbreviations
+<UseButton btn-type="p" sz="l" dis={false} />  ❌
+```
+
+#### Default Behavior
+- Sensible defaults untuk common use cases
+- Override-able untuk advanced use cases
+- No surprises untuk users
+
+#### API Surface
+- Minimal but complete
+- Predictable parameter names
+- Consistent with industry standards
+
+---
 
 ### Palet Warna
 
