@@ -19,6 +19,14 @@
   - [Typography](#typography)
   - [Spacing](#spacing)
 - [Struktur Komponen](#struktur-komponen)
+  - [Organisasi Folder](#-organisasi-folder)
+  - [Anatomi Komponen](#-anatomi-komponen)
+  - [Component Patterns](#-component-patterns)
+  - [File Conventions](#-component-file-conventions)
+  - [Dependencies](#-component-dependencies)
+  - [Framework-Specific Code](#-framework-specific-code)
+  - [Kategori Komponen](#-component-categories)
+  - [Composables & Utilities](#-composables--utilities)
 - [Dokumentasi API](#dokumentasi-api)
 - [Dukungan Lintas Framework](#dukungan-lintas-framework)
 - [Struktur Proyek](#struktur-proyek)
@@ -1314,49 +1322,558 @@ UseBtn          ❌
 
 ## 🧩 Struktur Komponen
 
-### Kategori Komponen
+### 📁 Organisasi Folder
 
-#### Form Components
-- `UseInput` - Text input field
-- `UseSelect` - Dropdown selection
-- `UseCheckbox` - Checkbox control
-- `UseRadio` - Radio button
-- `UseTextarea` - Multi-line text input
-- `UseSwitch` - Toggle switch
-- `UseForm` - Form wrapper dengan validation
-
-#### Layout Components
-- `UseContainer` - Container dengan max-width
-- `UseGrid` - Grid layout system
-- `UseStack` - Stack layout (vertical/horizontal)
-- `UseCard` - Card component
-- `UseSpacer` - Space component
-
-#### Navigation Components
-- `UseButton` - Button component
-- `UseNavbar` - Top navigation bar
-- `UseSidebar` - Side navigation
-- `UseBreadcrumb` - Breadcrumb trail
-- `UseMenu` - Dropdown menu
-
-#### Feedback Components
-- `UseToast` - Toast notification
-- `UseAlert` - Alert message
-- `UseModal` - Modal dialog
-- `UsePopover` - Popover overlay
-- `UseTooltip` - Tooltip information
-- `UseProgress` - Progress bar
-- `UseSkeleton` - Loading skeleton
-
-#### Data Display
-- `UseTable` - Data table component
-- `UsePagination` - Pagination control
-- `UseBadge` - Badge component
-- `UseTag` - Tag component
-- `UseAvatar` - Avatar component
-- `UseList` - List component
+```
+src/
+├── components/              # Shared component definitions
+│   ├── form/               # Form components
+│   │   ├── UseButton.vue
+│   │   ├── UseInput.vue
+│   │   ├── UseSelect.vue
+│   │   ├── UseCheckbox.vue
+│   │   ├── UseRadio.vue
+│   │   ├── UseTextarea.vue
+│   │   ├── UseSwitch.vue
+│   │   └── UseForm.vue
+│   │
+│   ├── layout/             # Layout components
+│   │   ├── UseContainer.vue
+│   │   ├── UseGrid.vue
+│   │   ├── UseStack.vue
+│   │   ├── UseCard.vue
+│   │   ├── UseSpacer.vue
+│   │   ├── UseFlexbox.vue
+│   │   └── UseAspectRatio.vue
+│   │
+│   ├── navigation/         # Navigation components
+│   │   ├── UseNavbar.vue
+│   │   ├── UseSidebar.vue
+│   │   ├── UseBreadcrumb.vue
+│   │   ├── UseMenu.vue
+│   │   ├── UseTabs.vue
+│   │   └── UsePagination.vue
+│   │
+│   ├── feedback/           # Feedback & status components
+│   │   ├── UseToast.vue
+│   │   ├── UseAlert.vue
+│   │   ├── UseModal.vue
+│   │   ├── UseDrawer.vue
+│   │   ├── UsePopover.vue
+│   │   ├── UseTooltip.vue
+│   │   ├── UseProgress.vue
+│   │   ├── UseSkeleton.vue
+│   │   ├── UseSpinner.vue
+│   │   └── UseConfirm.vue
+│   │
+│   └── data/               # Data display components
+│       ├── UseTable.vue
+│       ├── UseBadge.vue
+│       ├── UseTag.vue
+│       ├── UseAvatar.vue
+│       ├── UseList.vue
+│       ├── UseStatistic.vue
+│       ├── UseTimeline.vue
+│       └── UseTree.vue
+│
+├── composables/            # Reusable composition logic
+│   ├── useForm.ts         # Form handling logic
+│   ├── useModal.ts        # Modal state management
+│   ├── useToast.ts        # Toast notifications
+│   ├── useAsync.ts        # Async operations
+│   └── useTheme.ts        # Theme management
+│
+├── styles/                 # Design tokens & global styles
+│   ├── tokens.css         # CSS Variables
+│   ├── base.css           # Base styles
+│   ├── theme-light.css    # Light theme
+│   ├── theme-dark.css     # Dark theme
+│   └── utilities.css      # Utility classes
+│
+├── utils/                  # Utility functions
+│   ├── classnames.ts      # Class merging
+│   ├── validators.ts      # Form validators
+│   ├── accessibility.ts   # A11y helpers
+│   └── events.ts          # Event utilities
+│
+└── types/                  # TypeScript definitions
+    ├── components.ts      # Component props
+    ├── events.ts          # Component events
+    └── theme.ts           # Theme types
+```
 
 ---
+
+### 📋 Anatomi Komponen
+
+Setiap komponen use-ui dibangun dengan struktur yang konsisten:
+
+#### Single File Component (SFC) - Vue 3
+
+```vue
+<template>
+  <button
+    class="use-button"
+    :class="[`use-button--${type}`, `use-button--${size}`]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <span v-if="loading" class="use-button__loader">
+      <UseSpinner size="sm" />
+    </span>
+    <slot>{{ label }}</slot>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import UseSpinner from '../feedback/UseSpinner.vue'
+
+interface Props {
+  type?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+  label?: string
+}
+
+interface Emits {
+  (e: 'click', event: MouseEvent): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'primary',
+  size: 'md',
+  disabled: false,
+  loading: false
+})
+
+const emit = defineEmits<Emits>()
+
+const handleClick = (event: MouseEvent) => {
+  if (!props.disabled && !props.loading) {
+    emit('click', event)
+  }
+}
+</script>
+
+<style scoped>
+.use-button {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+
+  /* Default size */
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  height: var(--size-button-md);
+}
+
+/* Type variants */
+.use-button--primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.use-button--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.use-button--secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+/* Size variants */
+.use-button--sm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  height: var(--size-button-sm);
+}
+
+.use-button--lg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  height: var(--size-button-lg);
+}
+
+/* States */
+.use-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.use-button__loader {
+  display: inline-flex;
+  margin-right: var(--spacing-xs);
+}
+</style>
+```
+
+---
+
+### 🔄 Component Patterns
+
+#### 1. **Wrapper Pattern** (Layout/Container)
+Komponen yang membungkus konten dengan styling dan layout:
+
+```vue
+<template>
+  <div class="use-container" :class="{ 'use-container--fluid': fluid }">
+    <slot />
+  </div>
+</template>
+```
+
+**Contoh:** `UseContainer`, `UseCard`, `UseGrid`
+
+#### 2. **Form Input Pattern** (Form)
+Komponen input dengan validation dan state management:
+
+```vue
+<template>
+  <div class="use-input-group">
+    <label v-if="label" :for="inputId">{{ label }}</label>
+    <input
+      :id="inputId"
+      v-model="modelValue"
+      :type="type"
+      @blur="validate"
+      @change="emit('change', $event)"
+    />
+    <span v-if="error" class="use-input__error">{{ error }}</span>
+  </div>
+</template>
+```
+
+**Contoh:** `UseInput`, `UseSelect`, `UseCheckbox`, `UseTextarea`
+
+#### 3. **Modal/Overlay Pattern** (Feedback)
+Komponen yang menampilkan content di atas halaman:
+
+```vue
+<template>
+  <Teleport v-if="isOpen" to="body">
+    <div class="use-modal__backdrop" @click="close">
+      <div class="use-modal__content" @click.stop>
+        <header class="use-modal__header">
+          <slot name="header" />
+          <button @click="close">✕</button>
+        </header>
+        <section class="use-modal__body">
+          <slot />
+        </section>
+      </div>
+    </div>
+  </Teleport>
+</template>
+```
+
+**Contoh:** `UseModal`, `UseDrawer`, `UseToast`, `UsePopover`
+
+#### 4. **Data Display Pattern** (Data)
+Komponen untuk menampilkan data dengan formatting:
+
+```vue
+<template>
+  <table class="use-table">
+    <thead>
+      <tr v-for="column in columns" :key="column.key">
+        <th>{{ column.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in data" :key="row.id">
+        <td v-for="column in columns" :key="column.key">
+          {{ row[column.key] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+```
+
+**Contoh:** `UseTable`, `UseList`, `UseAvatar`, `UseBadge`
+
+#### 5. **Compound Component Pattern** (Complex)
+Beberapa komponen yang bekerja bersama:
+
+```vue
+<!-- Parent Component -->
+<UseForm @submit="handleSubmit">
+  <UseFormField label="Email">
+    <UseInput v-model="email" type="email" />
+  </UseFormField>
+  <UseFormField label="Password">
+    <UseInput v-model="password" type="password" />
+  </UseFormField>
+  <UseButton type="primary">Submit</UseButton>
+</UseForm>
+```
+
+---
+
+### 🏗️ Component File Conventions
+
+#### Naming Convention
+
+| Item | Convention | Contoh |
+|------|-----------|--------|
+| **Component Name** | PascalCase dengan prefix `Use` | `UseButton`, `UseInputField` |
+| **File Name** | PascalCase `.vue` | `UseButton.vue`, `UseInputField.vue` |
+| **Folder Name** | lowercase, descriptive | `form/`, `layout/`, `feedback/` |
+| **CSS Classes** | BEM + `use-` prefix | `.use-button--primary`, `.use-button__icon` |
+| **Props** | camelCase | `:isDisabled`, `:maxLength` |
+| **Events** | kebab-case | `@click-outside`, `@form-submit` |
+| **Slots** | kebab-case | `<slot name="header-left" />` |
+
+#### Component Props Template
+
+```typescript
+interface UseButtonProps {
+  // Appearance
+  type?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'solid' | 'outline' | 'ghost'
+
+  // State
+  disabled?: boolean
+  loading?: boolean
+
+  // Content
+  label?: string
+  icon?: string
+
+  // Behavior
+  native?: HTMLElement['type'] // for button type
+}
+```
+
+#### Component Events Template
+
+```typescript
+interface UseButtonEmits {
+  (e: 'click', event: MouseEvent): void
+  (e: 'focus', event: FocusEvent): void
+  (e: 'blur', event: FocusEvent): void
+}
+```
+
+---
+
+### 🔗 Component Dependencies
+
+#### Dependency Graph
+
+```
+UseForm
+  ├── UseFormField
+  │   ├── UseInput
+  │   ├── UseSelect
+  │   ├── UseCheckbox
+  │   └── UseRadio
+  ├── UseButton
+  └── UseAlert
+
+UseModal
+  ├── UseButton
+  └── useModal composable
+      └── teleport (Vue built-in)
+
+UseDataTable
+  ├── UsePagination
+  ├── UseBadge
+  ├── UseButton
+  └── useAsync composable
+```
+
+#### Circular Dependency Guidelines
+
+❌ **Hindari:**
+```typescript
+// ComponentA.vue imports ComponentB
+// ComponentB.vue imports ComponentA ← CIRCULAR!
+```
+
+✅ **Solusi:**
+```typescript
+// Extract shared logic to composable
+// ComponentA.vue imports composable
+// ComponentB.vue imports composable
+```
+
+---
+
+### 📦 Framework-Specific Code
+
+#### Vue 3 Specifics
+
+```
+src/vue3/
+├── components/          # Vue SFC files
+├── composables/         # Vue 3 Composition API
+├── directives/          # Vue 3 Custom Directives
+└── plugins/             # Vue 3 Plugins
+```
+
+#### React Specifics
+
+```
+src/react/
+├── components/          # React functional components
+├── hooks/               # React Custom Hooks
+├── providers/           # Context Providers
+└── hoc/                 # Higher-Order Components
+```
+
+#### Angular Specifics
+
+```
+src/angular/
+├── components/          # Angular Components
+├── directives/          # Angular Directives
+├── services/            # Angular Services
+└── modules/             # Angular Feature Modules
+```
+
+#### Vanilla JS Specifics
+
+```
+src/vanilla/
+├── components/          # Web Components
+├── utils/               # Helper functions
+├── registry/            # Component registry
+└── types/               # TypeScript definitions
+```
+
+---
+
+### 🎯 Component Categories
+
+#### ✅ Form Components
+Form-related input dan control elements
+
+| Komponen | Purpose | State | API |
+|----------|---------|-------|-----|
+| `UseInput` | Text input field | Controlled/Uncontrolled | v-model |
+| `UseSelect` | Dropdown selection | Controlled | v-model |
+| `UseCheckbox` | Checkbox control | Controlled | v-model |
+| `UseRadio` | Radio group | Controlled | v-model |
+| `UseTextarea` | Multi-line text | Controlled | v-model |
+| `UseSwitch` | Toggle switch | Controlled | v-model |
+| `UseForm` | Form wrapper | N/A | events |
+
+#### ✅ Layout Components
+Layout dan structural elements
+
+| Komponen | Purpose | Props | Slots |
+|----------|---------|-------|-------|
+| `UseContainer` | Max-width wrapper | `fluid`, `size` | default |
+| `UseGrid` | CSS Grid layout | `cols`, `gap`, `row-gap` | default |
+| `UseStack` | Flex stack layout | `direction`, `gap`, `align` | default |
+| `UseCard` | Card container | `shadow`, `hover`, `border` | default |
+| `UseSpacer` | Space element | `size` | N/A |
+
+#### ✅ Navigation Components
+Navigation dan menu elements
+
+| Komponen | Purpose | Stateful | Keyboard |
+|----------|---------|----------|----------|
+| `UseButton` | Interactive button | No | Yes |
+| `UseNavbar` | Top nav bar | No | Yes |
+| `UseSidebar` | Side navigation | Yes | Yes |
+| `UseBreadcrumb` | Breadcrumb trail | No | Yes |
+| `UseMenu` | Dropdown menu | Yes | Yes |
+
+#### ✅ Feedback Components
+Feedback, status, dan loading elements
+
+| Komponen | Type | Dismissible | Auto-dismiss |
+|----------|------|-----------|--------------|
+| `UseToast` | Notification | Yes | Configurable |
+| `UseAlert` | Alert message | No | No |
+| `UseModal` | Dialog box | Yes | No |
+| `UseDrawer` | Slide panel | Yes | No |
+| `UsePopover` | Floating box | Yes | No |
+| `UseTooltip` | Hint text | No | Yes |
+| `UseProgress` | Progress bar | N/A | N/A |
+| `UseSkeleton` | Loading placeholder | N/A | N/A |
+
+#### ✅ Data Display Components
+Data visualization elements
+
+| Komponen | Scrollable | Sortable | Filterable |
+|----------|-----------|----------|-----------|
+| `UseTable` | Yes | Yes | Yes |
+| `UsePagination` | N/A | N/A | N/A |
+| `UseBadge` | No | No | No |
+| `UseTag` | Wrap | No | No |
+| `UseAvatar` | No | No | No |
+| `UseList` | Yes | No | No |
+
+---
+
+### 🔌 Composables & Utilities
+
+#### Core Composables
+
+```typescript
+// Form handling
+export function useForm(config: FormConfig) {
+  return {
+    values,
+    errors,
+    isSubmitting,
+    submit,
+    reset,
+    setFieldValue,
+    setFieldError
+  }
+}
+
+// Modal state
+export function useModal(initialState?: boolean) {
+  return {
+    isOpen,
+    open,
+    close,
+    toggle
+  }
+}
+
+// Toast notifications
+export function useToast() {
+  return {
+    success,
+    error,
+    warning,
+    info,
+    dismiss
+  }
+}
+
+// Theme management
+export function useTheme() {
+  return {
+    theme,
+    isDark,
+    toggleTheme,
+    setTheme
+  }
+}
+```
+
+---
+
+## 📖 Dokumentasi API
 
 ## 📖 Dokumentasi API
 
